@@ -1,0 +1,179 @@
+{
+  "id": "WRAPCOLS",
+  "name": "WRAPCOLS",
+  "zh": "依欄折行排列",
+  "en": "Wrap into columns",
+  "category": "array",
+  "level": "進階",
+  "version": "Microsoft 365 / Excel 2024",
+  "summary": "把一整排資料，依指定筆數一欄一欄往右折成表格。",
+  "summary_en": "Wrap a single row or column into multiple columns of a given height.",
+  "syntax": "=WRAPCOLS(vector, wrap_count, [pad_with])",
+  "slides": [
+    {
+      "type": "title",
+      "title": "WRAPCOLS",
+      "subtitle": "長長一串，折成好幾欄",
+      "say": [
+        "哈囉！今天要學 WRAPCOLS 函數。",
+        "名單常常是長長的一整欄，",
+        "印出來很浪費紙，也不好閱讀。",
+        "WRAPCOLS 可以幫你折成好幾欄！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "WRAPCOLS 能做什麼？",
+      "points": [
+        { "icon": "list", "text": "接收一整欄或一整列", "at": 1 },
+        { "icon": "grid", "text": "每欄放固定筆數", "at": 2 },
+        { "icon": "arrow", "text": "由上往下、再往右排", "at": 3 },
+        { "icon": "layers", "text": "不足的格子可補值", "at": 4 }
+      ],
+      "say": [
+        "WRAPCOLS 的重點有四個。",
+        "它接收一整欄或一整列的資料，",
+        "依你指定的筆數，決定每欄放幾個。",
+        "排法是先由上往下，滿了再往右。",
+        "最後不夠的格子，還能自訂補值。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "WRAPCOLS",
+      "args": [
+        { "name": "vector", "desc": "一欄或一列資料", "at": 1 },
+        { "name": "wrap_count", "desc": "每欄幾筆", "at": 2 },
+        { "name": "pad_with", "desc": "不足時補什麼", "optional": true, "at": 3 }
+      ],
+      "say": [
+        "語法只有三個引數。",
+        "第一個是要折的資料，一欄或一列。",
+        "第二個是每一欄要放幾筆。",
+        "第三個是不足時要補的值，可省略。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：名單折成兩欄",
+      "header": ["值日生"],
+      "rows": [
+        ["王小明"],
+        ["林美華"],
+        ["陳大文"],
+        ["張雅婷"],
+        ["李志豪"],
+        ["黃怡君"]
+      ],
+      "formula": "=WRAPCOLS(A2:A7,3)",
+      "spill": [
+        ["王小明", "張雅婷"],
+        ["林美華", "李志豪"],
+        ["陳大文", "黃怡君"]
+      ],
+      "marks": [
+        { "at": 1, "range": "A2:A7", "kind": "range", "label": "六位值日生" },
+        { "at": 3, "range": "A2:A4", "kind": "hit", "label": "第一欄" },
+        { "at": 4, "range": "A5:A7", "kind": "key", "label": "第二欄" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這裡有六位值日生，排成一長欄。",
+        "資料範圍是 A2 到 A7。",
+        "每欄放三筆，所以第二個引數填三。",
+        "前三位由上往下，排進第一欄，",
+        "後三位再往右，排進第二欄！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：不夠時自動補值",
+      "header": ["組別"],
+      "rows": [
+        ["第1組"],
+        ["第2組"],
+        ["第3組"],
+        ["第4組"],
+        ["第5組"]
+      ],
+      "formula": "=WRAPCOLS(A2:A6,2,\"待補\")",
+      "spill": [
+        ["第1組", "第3組", "第5組"],
+        ["第2組", "待補", "待補"]
+      ],
+      "marks": [
+        { "at": 1, "range": "A2:A6", "kind": "range", "label": "五個組別" },
+        { "at": 2, "range": "A2:A3", "kind": "hit", "label": "第一欄" },
+        { "at": 3, "range": "A6", "kind": "warn", "label": "最後只剩一個" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這次有五個組別，每欄放兩筆。",
+        "A2 到 A6 共五筆，要排成三欄。",
+        "第一欄是第一組和第二組，",
+        "第三欄只剩第五組，少了一格。",
+        "因為有填待補，空格就顯示待補。"
+      ]
+    },
+    {
+      "type": "flow",
+      "title": "WRAPCOLS 的排列順序",
+      "nodes": [
+        { "label": "讀入資料", "sub": "vector", "at": 1 },
+        { "label": "往下排", "sub": "wrap_count", "at": 2 },
+        { "label": "換下一欄", "sub": "滿了就往右", "at": 3 },
+        { "label": "補滿空格", "sub": "pad_with", "at": 4 }
+      ],
+      "say": [
+        "我們把排列順序整理一下。",
+        "先把整串資料依序讀進來，",
+        "從第一欄開始，由上往下排。",
+        "排滿指定筆數，就換到右邊下一欄。",
+        "最後的空格，用補值填滿。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        { "kind": "warn", "text": "沒填補值會出現 #N/A", "at": 1 },
+        { "kind": "tip", "text": "補值可填 \"\" 變成空白", "at": 2 },
+        { "kind": "warn", "text": "來源只能是一欄或一列", "at": 3 },
+        { "kind": "tip", "text": "想橫著排請用 WRAPROWS", "at": 4 }
+      ],
+      "say": [
+        "來看幾個小提醒。",
+        "如果沒填補值，空格會顯示 #N/A。",
+        "補值填兩個雙引號，就會是空白。",
+        "來源必須是一欄或一列，不能是表格。",
+        "想一列一列橫著排，請用 WRAPROWS。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "WRAPCOLS(A2:A9,4) 會把八筆資料排成幾欄？",
+      "options": ["一欄", "兩欄", "四欄", "八欄"],
+      "answer": 1,
+      "explain": "每欄放四筆，八筆資料剛好排成兩欄。",
+      "say": [
+        "來個隨堂小測驗！",
+        "八筆資料，每欄放四筆，",
+        "WRAPCOLS 會排成幾欄呢？",
+        "答案是兩欄！八除以四等於二。"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": ["一欄資料折成多欄", "先往下、再往右", "第二引數是每欄筆數", "第三引數補空格"],
+      "say": [
+        "重點回顧一下。",
+        "WRAPCOLS 把一串資料折成多欄，",
+        "順序是先往下排，再往右換欄。",
+        "記得用補值，讓表格更整齊喔！"
+      ]
+    }
+  ]
+}

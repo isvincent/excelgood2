@@ -1,0 +1,172 @@
+{
+  "id": "INDEX",
+  "name": "INDEX",
+  "zh": "依位置取值",
+  "en": "Get value by position",
+  "category": "lookup",
+  "level": "基礎",
+  "version": "所有版本",
+  "summary": "指定第幾列、第幾欄，從範圍中取出那一格的值。",
+  "summary_en": "Return the value at a given row and column inside a range.",
+  "syntax": "=INDEX(array, row_num, [column_num])",
+  "slides": [
+    {
+      "type": "title",
+      "title": "INDEX",
+      "subtitle": "說出座標，馬上取值",
+      "say": [
+        "哈囉！今天要學的是 INDEX 函數。",
+        "它就像在教室裡找座位，",
+        "告訴它第幾排、第幾個，",
+        "它就把那一格的資料交給你。"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "INDEX 能做什麼？",
+      "points": [
+        { "icon": "grid", "text": "在範圍中定位一格", "at": 1 },
+        { "icon": "list", "text": "指定第幾列", "at": 2 },
+        { "icon": "table", "text": "指定第幾欄", "at": 3 },
+        { "icon": "link", "text": "常和 MATCH 搭配", "at": 4 }
+      ],
+      "say": [
+        "INDEX 的重點有四個。",
+        "第一，它在一個範圍裡找出某一格。",
+        "第二，你要告訴它是第幾列。",
+        "第三，範圍有多欄時，再說第幾欄。",
+        "第四，它最常和 MATCH 搭配使用。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "INDEX",
+      "args": [
+        { "name": "array", "desc": "資料範圍", "at": 1 },
+        { "name": "row_num", "desc": "第幾列", "at": 2 },
+        { "name": "column_num", "desc": "第幾欄", "optional": true, "at": 3 }
+      ],
+      "say": [
+        "來看語法，共有三個引數。",
+        "第一個是 array，也就是資料範圍。",
+        "第二個是 row_num，要取第幾列。",
+        "第三個是 column_num，要取第幾欄。",
+        "範圍只有一欄時，第三個可以省略。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：取出第 3 位同學",
+      "header": ["座號", "姓名", "國文", "數學"],
+      "rows": [
+        ["1", "王小明", "88", "75"],
+        ["2", "林美華", "92", "81"],
+        ["3", "陳大文", "79", "94"],
+        ["4", "張雅婷", "85", "68"],
+        ["5", "李志豪", "70", "90"]
+      ],
+      "formula": "=INDEX(B2:B6,3)",
+      "result": "陳大文",
+      "marks": [
+        { "at": 1, "range": "B2:B6", "kind": "range", "label": "資料範圍" },
+        { "at": 2, "range": "B4", "kind": "hit", "label": "第 3 列" },
+        { "at": 3, "range": "B4", "kind": "out", "label": "傳回結果" }
+      ],
+      "showResultAt": 3,
+      "say": [
+        "我們要取出姓名欄的第三位同學。",
+        "範圍是 B2 到 B6，只有一欄。",
+        "從 B2 開始往下數三格，就是 B4。",
+        "所以 INDEX 傳回：陳大文！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：列和欄一起指定",
+      "header": ["座號", "姓名", "國文", "數學"],
+      "rows": [
+        ["1", "王小明", "88", "75"],
+        ["2", "林美華", "92", "81"],
+        ["3", "陳大文", "79", "94"],
+        ["4", "張雅婷", "85", "68"],
+        ["5", "李志豪", "70", "90"]
+      ],
+      "formula": "=INDEX(B2:D6,4,3)",
+      "result": "68",
+      "marks": [
+        { "at": 1, "range": "B2:D6", "kind": "range", "label": "資料範圍" },
+        { "at": 2, "range": "B5:D5", "kind": "key", "label": "第 4 列" },
+        { "at": 3, "range": "D2:D6", "kind": "key", "label": "第 3 欄" },
+        { "at": 4, "range": "D5", "kind": "out", "label": "交叉點" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這次範圍變成 B2 到 D6，有三欄。",
+        "我們指定第四列、第三欄。",
+        "第四列是張雅婷這一列，",
+        "第三欄是數學這一欄，",
+        "交叉的那一格就是 68 分！"
+      ]
+    },
+    {
+      "type": "flow",
+      "title": "INDEX 的運作流程",
+      "nodes": [
+        { "label": "框出範圍", "sub": "array", "at": 1 },
+        { "label": "往下數列", "sub": "row_num", "at": 2 },
+        { "label": "往右數欄", "sub": "column_num", "at": 3 },
+        { "label": "取出該格", "sub": "交叉點的值", "at": 4 }
+      ],
+      "say": [
+        "我們把流程整理一下。",
+        "先框出要取資料的範圍，",
+        "從範圍頂端往下數到第幾列，",
+        "再從左邊往右數到第幾欄，",
+        "最後取出交叉點那一格的值。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        { "kind": "tip", "text": "列欄是從範圍內開始數", "at": 1 },
+        { "kind": "tip", "text": "搭配 MATCH 自動算出位置", "at": 2 },
+        { "kind": "warn", "text": "超出範圍會出現 #REF!", "at": 3 },
+        { "kind": "tip", "text": "列號填 0 可取出整欄", "at": 4 }
+      ],
+      "say": [
+        "最後是幾個小提醒。",
+        "列和欄是從範圍裡面開始數，不是工作表。",
+        "搭配 MATCH，就能自動算出要第幾列。",
+        "數字超出範圍，會出現 #REF! 錯誤。",
+        "列號填零，可以一次取出整欄資料。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "用上面的成績表，=INDEX(B2:D6,2,2) 會傳回什麼？",
+      "options": ["林美華", "92", "81", "88"],
+      "answer": 1,
+      "explain": "第 2 列是林美華，第 2 欄是國文，交叉點是 92。",
+      "say": [
+        "來個隨堂小測驗！",
+        "INDEX 範圍 B2 到 D6，第二列第二欄，",
+        "會傳回什麼呢？",
+        "答案是 92，林美華的國文成績！"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": ["範圍、第幾列、第幾欄", "從範圍內開始數", "超出範圍是 #REF!", "和 MATCH 是黃金組合"],
+      "say": [
+        "重點回顧一下。",
+        "INDEX 只要範圍、列號和欄號，",
+        "記得列欄是從範圍裡面開始數。",
+        "下一課學 MATCH，組合起來更強大！"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,331 @@
+{
+  "id": "UNIQUE",
+  "name": "UNIQUE",
+  "zh": "取出不重複值",
+  "en": "Remove duplicates",
+  "category": "dynamic",
+  "level": "進階",
+  "version": "Microsoft 365 / Excel 2021",
+  "summary": "從一個範圍中取出不重複的值，結果自動溢出成清單。",
+  "summary_en": "Return the distinct values from a range as a spilled list.",
+  "syntax": "=UNIQUE(array, [by_col], [exactly_once])",
+  "slides": [
+    {
+      "type": "title",
+      "title": "UNIQUE",
+      "subtitle": "一鍵整理出不重複清單",
+      "say": [
+        "哈囉！今天要學的是 UNIQUE 函數。",
+        "名單裡常常有重複的資料，",
+        "UNIQUE 可以一次把重複的拿掉，",
+        "而且資料一改，結果也會自動更新。"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "UNIQUE 能做什麼？",
+      "points": [
+        {
+          "icon": "filter",
+          "text": "去掉重複，只留一次",
+          "at": 1
+        },
+        {
+          "icon": "list",
+          "text": "依出現順序列出結果",
+          "at": 2
+        },
+        {
+          "icon": "star",
+          "text": "可只找出現一次的值",
+          "at": 3
+        },
+        {
+          "icon": "zap",
+          "text": "來源改變，自動更新",
+          "at": 4
+        }
+      ],
+      "say": [
+        "UNIQUE 有四個重點。",
+        "第一，重複的值只會留下一次。",
+        "第二，結果依照第一次出現的順序排列。",
+        "第三，也可以只找出只出現一次的值。",
+        "第四，來源資料一改，結果自動跟著變。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "UNIQUE",
+      "args": [
+        {
+          "name": "array",
+          "desc": "要整理的範圍",
+          "at": 1
+        },
+        {
+          "name": "by_col",
+          "desc": "是否依欄比較",
+          "optional": true,
+          "at": 2
+        },
+        {
+          "name": "exactly_once",
+          "desc": "只取出現一次",
+          "optional": true,
+          "at": 3
+        }
+      ],
+      "say": [
+        "來看語法，共有三個引數。",
+        "第一個是要整理的範圍，這是必填的。",
+        "第二個 by_col，填 TRUE 會改成比較欄。",
+        "第三個填 TRUE，只取出現一次的值。",
+        "後面兩個平常都可以省略喔。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：列出所有社團",
+      "header": [
+        "姓名",
+        "社團"
+      ],
+      "rows": [
+        [
+          "王小明",
+          "籃球社"
+        ],
+        [
+          "林美華",
+          "熱舞社"
+        ],
+        [
+          "陳大文",
+          "籃球社"
+        ],
+        [
+          "張雅婷",
+          "吉他社"
+        ],
+        [
+          "李志豪",
+          "熱舞社"
+        ]
+      ],
+      "formula": "=UNIQUE(B2:B6)",
+      "spill": [
+        [
+          "籃球社"
+        ],
+        [
+          "熱舞社"
+        ],
+        [
+          "吉他社"
+        ]
+      ],
+      "marks": [
+        {
+          "at": 1,
+          "range": "B2:B6",
+          "kind": "range",
+          "label": "來源範圍"
+        },
+        {
+          "at": 2,
+          "range": "B4",
+          "kind": "warn",
+          "label": "重複"
+        },
+        {
+          "at": 2,
+          "range": "B6",
+          "kind": "warn",
+          "label": "重複"
+        }
+      ],
+      "showResultAt": 3,
+      "say": [
+        "這是五位同學參加的社團。",
+        "我們用 UNIQUE 整理 B2 到 B6。",
+        "籃球社和熱舞社都出現了兩次，",
+        "結果只留下三個社團，各出現一次！",
+        "順序就是它們第一次出現的順序。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：只賣出一次的商品",
+      "header": [
+        "訂單",
+        "商品"
+      ],
+      "rows": [
+        [
+          "O01",
+          "原子筆"
+        ],
+        [
+          "O02",
+          "筆記本"
+        ],
+        [
+          "O03",
+          "原子筆"
+        ],
+        [
+          "O04",
+          "修正帶"
+        ],
+        [
+          "O05",
+          "便利貼"
+        ],
+        [
+          "O06",
+          "筆記本"
+        ]
+      ],
+      "formula": "=UNIQUE(B2:B7,,TRUE)",
+      "spill": [
+        [
+          "修正帶"
+        ],
+        [
+          "便利貼"
+        ]
+      ],
+      "marks": [
+        {
+          "at": 1,
+          "range": "B2:B7",
+          "kind": "range",
+          "label": "來源範圍"
+        },
+        {
+          "at": 3,
+          "range": "B5",
+          "kind": "hit",
+          "label": "只出現一次"
+        },
+        {
+          "at": 3,
+          "range": "B6",
+          "kind": "hit",
+          "label": "只出現一次"
+        }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這次想知道哪些商品只賣出一次。",
+        "範圍是 B2 到 B7 的商品名稱。",
+        "第二個引數空著，第三個填 TRUE。",
+        "原子筆和筆記本都重複，會被排除，",
+        "最後只剩下修正帶和便利貼！"
+      ]
+    },
+    {
+      "type": "flow",
+      "title": "UNIQUE 的運作流程",
+      "nodes": [
+        {
+          "label": "讀取範圍",
+          "sub": "array",
+          "at": 1
+        },
+        {
+          "label": "由上往下",
+          "sub": "逐一檢查",
+          "at": 2
+        },
+        {
+          "label": "略過重複",
+          "sub": "已出現就跳過",
+          "at": 3
+        },
+        {
+          "label": "溢出結果",
+          "sub": "自動往下填",
+          "at": 4
+        }
+      ],
+      "say": [
+        "我們把流程整理一下。",
+        "UNIQUE 先讀取整個範圍，",
+        "然後由上往下逐一檢查每個值，",
+        "已經出現過的就直接跳過，",
+        "最後把結果自動溢出到下方儲存格。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        {
+          "kind": "tip",
+          "text": "搭配 SORT 可排序結果",
+          "at": 1
+        },
+        {
+          "kind": "tip",
+          "text": "選多欄會比較整列組合",
+          "at": 2
+        },
+        {
+          "kind": "warn",
+          "text": "下方被擋住會出現 #SPILL!",
+          "at": 3
+        },
+        {
+          "kind": "warn",
+          "text": "英文大小寫視為相同",
+          "at": 4
+        }
+      ],
+      "say": [
+        "最後是幾個小提醒。",
+        "外面包一層 SORT，結果就會排好序。",
+        "如果選了多欄，會比較整列是否相同。",
+        "溢出位置被擋住，會出現 SPILL 錯誤。",
+        "另外，英文大小寫會被當成一樣喔。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "想找出「只出現過一次」的值，UNIQUE 的哪個引數要填 TRUE？",
+      "options": [
+        "array",
+        "by_col",
+        "exactly_once",
+        "都不用填"
+      ],
+      "answer": 2,
+      "explain": "第三個引數 exactly_once 填 TRUE，只傳回出現一次的值。",
+      "say": [
+        "來個隨堂小測驗！",
+        "想找出只出現過一次的值，",
+        "要把哪個引數填成 TRUE 呢？",
+        "答案是第三個引數，exactly_once！"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": [
+        "一個範圍就能去重複",
+        "依第一次出現排列",
+        "填 TRUE 只取唯一",
+        "搭配 SORT 更好用"
+      ],
+      "say": [
+        "重點回顧一下。",
+        "UNIQUE 只要給範圍，就能去掉重複。",
+        "第三個引數填 TRUE，找只出現一次的值。",
+        "學會 UNIQUE，整理名單超輕鬆！"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "id": "SWITCH",
+  "name": "SWITCH",
+  "zh": "多選一對應",
+  "en": "Match and switch",
+  "category": "logic",
+  "level": "進階",
+  "version": "Microsoft 365 / Excel 2019",
+  "summary": "拿一個值逐一比對清單，傳回第一個相符的結果。",
+  "summary_en": "Compare one value against a list and return the first matching result.",
+  "syntax": "=SWITCH(expression, value1, result1, [value2, result2], ..., [default])",
+  "slides": [
+    {
+      "type": "title",
+      "title": "SWITCH",
+      "subtitle": "告別一層又一層的 IF",
+      "say": [
+        "哈囉！今天要學的是 SWITCH 函數。",
+        "它可以把代碼對應成文字，",
+        "像是 A 變優秀、B 變良好。",
+        "以前要寫好幾層 IF，現在一個就搞定！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "SWITCH 能做什麼？",
+      "points": [
+        { "icon": "key", "text": "拿一個值來比對", "at": 1 },
+        { "icon": "list", "text": "依序比對每個選項", "at": 2 },
+        { "icon": "check", "text": "相符就傳回結果", "at": 3 },
+        { "icon": "shield", "text": "都不符時有預設值", "at": 4 }
+      ],
+      "say": [
+        "SWITCH 的重點有四個。",
+        "第一，先拿一個值當比對對象。",
+        "第二，依序和每個選項比對。",
+        "第三，相符就傳回對應的結果。",
+        "第四，都不相符時，可以給一個預設值。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "SWITCH",
+      "args": [
+        { "name": "expression", "desc": "要比對的值", "at": 1 },
+        { "name": "value1", "desc": "第一個選項", "at": 2 },
+        { "name": "result1", "desc": "選項一的結果", "at": 2 },
+        { "name": "value2, result2", "desc": "更多組選項", "optional": true, "at": 3 },
+        { "name": "default", "desc": "都不符時", "optional": true, "at": 4 }
+      ],
+      "say": [
+        "來看語法，引數是一組一組的。",
+        "第一個是要比對的值，通常是儲存格。",
+        "接著是選項和結果，兩個一組。",
+        "可以一直加下去，最多一百二十六組。",
+        "最後單獨一個，是都不符時的預設值。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：等第轉評語",
+      "header": ["姓名", "等第", "評語"],
+      "rows": [
+        ["王小明", "A", "優秀"],
+        ["林美華", "B", ""],
+        ["陳大文", "C", "加油"],
+        ["張雅婷", "A", "優秀"]
+      ],
+      "formula": "=SWITCH(B3,\"A\",\"優秀\",\"B\",\"良好\",\"C\",\"加油\")",
+      "result": "良好",
+      "marks": [
+        { "at": 1, "range": "B3", "kind": "range", "label": "比對 B" },
+        { "at": 2, "range": "B3", "kind": "hit", "label": "第二組相符" },
+        { "at": 3, "range": "C3", "kind": "out", "label": "傳回結果" }
+      ],
+      "showResultAt": 3,
+      "say": [
+        "我們要把等第代碼換成評語。",
+        "林美華在 B3 的等第是 B。",
+        "比對 A 不符，比對 B 就相符了！",
+        "所以傳回第二組的結果：良好。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：預設值",
+      "header": ["學號", "社團代碼", "社團"],
+      "rows": [
+        ["11001", "1", "熱舞社"],
+        ["11002", "2", "吉他社"],
+        ["11003", "1", "熱舞社"],
+        ["11004", "9", ""]
+      ],
+      "formula": "=SWITCH(B5,1,\"熱舞社\",2,\"吉他社\",\"未登記\")",
+      "result": "未登記",
+      "marks": [
+        { "at": 1, "range": "B5", "kind": "range", "label": "代碼 9" },
+        { "at": 2, "range": "B2:B4", "kind": "key", "label": "只有 1 和 2" },
+        { "at": 3, "range": "B5", "kind": "warn", "label": "都不符" },
+        { "at": 4, "range": "C5", "kind": "out", "label": "預設值" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這次把社團代碼換成社團名稱。",
+        "學號 11004 的代碼填了 9。",
+        "但選項只有 1 和 2，",
+        "全部比對完都不相符，",
+        "就傳回最後的預設值：未登記！"
+      ]
+    },
+    {
+      "type": "compare",
+      "title": "SWITCH vs 巢狀 IF",
+      "left": { "head": "巢狀 IF", "items": ["一層包一層", "比對值要重複寫", "括號容易數錯", "所有版本可用"] },
+      "right": { "head": "SWITCH", "items": ["一層就寫完", "比對值只寫一次", "選項結果成對好讀", "2019 以後才有"] },
+      "say": [
+        "和巢狀 IF 比一比。",
+        "巢狀 IF 要一層包一層，括號很容易錯；",
+        "SWITCH 只寫一層，選項和結果成對排好。",
+        "可讀性好很多，修改也更方便。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        { "kind": "tip", "text": "選項和結果要成對出現", "at": 1 },
+        { "kind": "warn", "text": "沒預設值又不符會 #N/A", "at": 2 },
+        { "kind": "warn", "text": "只能比對「等於」", "at": 3 },
+        { "kind": "tip", "text": "區間判斷改用 IFS", "at": 4 }
+      ],
+      "say": [
+        "最後是幾個小提醒。",
+        "選項和結果一定要兩個兩個成對。",
+        "沒有預設值又都不符，會出現 #N/A。",
+        "SWITCH 只能比對相等，不能比大小。",
+        "要判斷分數區間，請改用 IFS。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "=SWITCH(3,1,\"一\",2,\"二\",\"其他\") 的結果是？",
+      "options": ["一", "二", "其他", "#N/A"],
+      "answer": 2,
+      "explain": "3 不等於 1 也不等於 2，所以傳回預設值「其他」。",
+      "say": [
+        "來個隨堂小測驗！",
+        "拿 3 去比對 1 和 2，",
+        "SWITCH 會傳回什麼呢？",
+        "答案是「其他」，傳回了預設值！"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": ["一個值比對多個選項", "選項結果兩兩成對", "最後一個是預設值", "取代巢狀 IF"],
+      "say": [
+        "重點回顧一下。",
+        "SWITCH 拿一個值，依序比對每個選項。",
+        "記得在最後加上預設值，避免錯誤。",
+        "學會 SWITCH，公式清爽又好懂！"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "id": "HSTACK",
+  "name": "HSTACK",
+  "zh": "左右合併表格",
+  "en": "Stack horizontally",
+  "category": "array",
+  "level": "進階",
+  "version": "Microsoft 365 / Excel 2024",
+  "summary": "把多個範圍由左往右並排在一起，合併成一張表。",
+  "summary_en": "Append arrays horizontally, side by side, into a single array.",
+  "syntax": "=HSTACK(array1, [array2], ...)",
+  "slides": [
+    {
+      "type": "title",
+      "title": "HSTACK",
+      "subtitle": "好幾欄資料，左右拼一起",
+      "say": [
+        "哈囉！今天要學 HSTACK 函數。",
+        "想把不相鄰的欄位放在一起，",
+        "或是自由調整欄位的位置嗎？",
+        "HSTACK 幫你左右拼起來！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "HSTACK 能做什麼？",
+      "points": [
+        { "icon": "merge", "text": "把多個範圍左右並排", "at": 1 },
+        { "icon": "sort", "text": "依引數順序往右排", "at": 2 },
+        { "icon": "link", "text": "來源更新就跟著變", "at": 3 },
+        { "icon": "cross", "text": "高度不同會補 #N/A", "at": 4 }
+      ],
+      "say": [
+        "HSTACK 的重點有四個。",
+        "它把好幾個範圍，左右並排在一起。",
+        "依照你寫的順序，一個接一個往右排。",
+        "來源資料一改，結果就自動更新。",
+        "如果高度不同，缺的格子會補 #N/A。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "HSTACK",
+      "args": [
+        { "name": "array1", "desc": "最左邊的範圍", "at": 1 },
+        { "name": "array2", "desc": "接在右邊的範圍", "optional": true, "at": 2 }
+      ],
+      "say": [
+        "語法和 VSTACK 一樣簡單。",
+        "第一個引數是放在最左邊的範圍，",
+        "後面的範圍，會依序接在右邊。",
+        "要並排幾個範圍，就寫幾個引數。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：只拼姓名和數學",
+      "header": ["姓名", "國文", "數學"],
+      "rows": [
+        ["王小明", "88", "92"],
+        ["林美華", "95", "85"],
+        ["陳大文", "76", "90"],
+        ["張雅婷", "82", "78"]
+      ],
+      "formula": "=HSTACK(A2:A5,C2:C5)",
+      "spill": [
+        ["王小明", "92"],
+        ["林美華", "85"],
+        ["陳大文", "90"],
+        ["張雅婷", "78"]
+      ],
+      "marks": [
+        { "at": 1, "range": "A2:A5", "kind": "range", "label": "姓名" },
+        { "at": 2, "range": "C2:C5", "kind": "key", "label": "數學" },
+        { "at": 3, "range": "B2:B5", "kind": "warn", "label": "跳過國文" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這次只想看姓名和數學成績。",
+        "第一個範圍是 A2 到 A5 的姓名，",
+        "第二個範圍是 C2 到 C5 的數學。",
+        "中間的國文欄就被跳過了，",
+        "兩欄並排，一目了然！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：高度不同會怎樣？",
+      "header": ["上午組", "下午組"],
+      "rows": [
+        ["王小明", "林美華"],
+        ["陳大文", "張雅婷"],
+        ["李志豪", ""]
+      ],
+      "formula": "=HSTACK(A2:A4,B2:B3)",
+      "spill": [
+        ["王小明", "林美華"],
+        ["陳大文", "張雅婷"],
+        ["李志豪", "#N/A"]
+      ],
+      "marks": [
+        { "at": 1, "range": "A2:A4", "kind": "range", "label": "三人" },
+        { "at": 1, "range": "B2:B3", "kind": "key", "label": "兩人" },
+        { "at": 3, "range": "B4", "kind": "warn", "label": "少一格" }
+      ],
+      "showResultAt": 3,
+      "say": [
+        "上午組三個人，下午組只有兩個人。",
+        "A2 到 A4 是三列，B2 到 B3 是兩列。",
+        "結果會以最高的三列為準，",
+        "下午組少的那一格，就補上 #N/A。",
+        "外面包 IFERROR 就能換成空白。"
+      ]
+    },
+    {
+      "type": "compare",
+      "title": "HSTACK vs VSTACK",
+      "left": { "head": "HSTACK", "items": ["左右並排", "欄數相加", "高度不同補 #N/A", "適合組合欄位"] },
+      "right": { "head": "VSTACK", "items": ["上下相接", "列數相加", "寬度不同補 #N/A", "適合合併名單"] },
+      "say": [
+        "和 VSTACK 比一比。",
+        "HSTACK 左右並排，欄數相加；",
+        "VSTACK 上下相接，列數相加。",
+        "兩個尺寸不合時，都會補 #N/A。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        { "kind": "tip", "text": "引數順序就是左右順序", "at": 1 },
+        { "kind": "tip", "text": "可自由調整欄位位置", "at": 2 },
+        { "kind": "tip", "text": "可和 VSTACK 互相搭配", "at": 3 },
+        { "kind": "warn", "text": "舊版 Excel 沒有此函數", "at": 4 }
+      ],
+      "say": [
+        "來看幾個小提醒。",
+        "引數的順序，就是左右的順序。",
+        "所以可以用它自由調整欄位位置。",
+        "也能和 VSTACK 搭配，組出新表格。",
+        "舊版 Excel 沒有這個函數喔。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "HSTACK 並排 2 欄和 3 欄的範圍，結果共有幾欄？",
+      "options": ["2 欄", "3 欄", "5 欄", "6 欄"],
+      "answer": 2,
+      "explain": "左右並排，欄數相加：二加三等於五欄。",
+      "say": [
+        "來個隨堂小測驗！",
+        "HSTACK 並排兩欄和三欄的範圍，",
+        "結果總共有幾欄呢？",
+        "答案是五欄！左右並排欄數相加。"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": ["多個範圍左右並排", "順序依照引數", "高度不同補 #N/A", "自由組合欄位"],
+      "say": [
+        "重點回顧一下。",
+        "HSTACK 把多個範圍左右並排，",
+        "高度不同會補 #N/A，要多留意。",
+        "想組合欄位，就用 HSTACK 吧！"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "id": "WRAPROWS",
+  "name": "WRAPROWS",
+  "zh": "依列折行排列",
+  "en": "Wrap into rows",
+  "category": "array",
+  "level": "進階",
+  "version": "Microsoft 365 / Excel 2024",
+  "summary": "把一整排資料，依指定筆數一列一列往下折成表格。",
+  "summary_en": "Wrap a single row or column into multiple rows of a given width.",
+  "syntax": "=WRAPROWS(vector, wrap_count, [pad_with])",
+  "slides": [
+    {
+      "type": "title",
+      "title": "WRAPROWS",
+      "subtitle": "一長串資料，橫著折成表",
+      "say": [
+        "哈囉！今天要學 WRAPROWS 函數。",
+        "它可以把一長串資料，",
+        "依照固定的寬度，一列一列排好，",
+        "做座位表、分組表都超好用！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "WRAPROWS 能做什麼？",
+      "points": [
+        { "icon": "list", "text": "接收一整欄或一整列", "at": 1 },
+        { "icon": "grid", "text": "每列放固定筆數", "at": 2 },
+        { "icon": "arrow", "text": "由左往右、再往下排", "at": 3 },
+        { "icon": "layers", "text": "不足的格子可補值", "at": 4 }
+      ],
+      "say": [
+        "WRAPROWS 的重點有四個。",
+        "它接收一整欄或一整列的資料，",
+        "依你指定的筆數，決定每列放幾個。",
+        "排法是先由左往右，滿了再往下。",
+        "最後不夠的格子，可以自訂補值。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "WRAPROWS",
+      "args": [
+        { "name": "vector", "desc": "一欄或一列資料", "at": 1 },
+        { "name": "wrap_count", "desc": "每列幾筆", "at": 2 },
+        { "name": "pad_with", "desc": "不足時補什麼", "optional": true, "at": 3 }
+      ],
+      "say": [
+        "語法和 WRAPCOLS 一模一樣。",
+        "第一個是要折的資料，一欄或一列。",
+        "第二個是每一列要放幾筆。",
+        "第三個是不足時的補值，可以省略。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：排成座位表",
+      "header": ["學生"],
+      "rows": [
+        ["王小明"],
+        ["林美華"],
+        ["陳大文"],
+        ["張雅婷"],
+        ["李志豪"],
+        ["黃怡君"]
+      ],
+      "formula": "=WRAPROWS(A2:A7,3)",
+      "spill": [
+        ["王小明", "林美華", "陳大文"],
+        ["張雅婷", "李志豪", "黃怡君"]
+      ],
+      "marks": [
+        { "at": 1, "range": "A2:A7", "kind": "range", "label": "六位學生" },
+        { "at": 3, "range": "A2:A4", "kind": "hit", "label": "第一排" },
+        { "at": 4, "range": "A5:A7", "kind": "key", "label": "第二排" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "我們想把六位學生排成座位表。",
+        "資料範圍是 A2 到 A7。",
+        "一排坐三個人，第二個引數填三。",
+        "前三位由左往右，坐滿第一排，",
+        "後三位換到下一列，坐第二排！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：筆數不夠會怎樣？",
+      "header": ["社團"],
+      "rows": [
+        ["熱舞社"],
+        ["吉他社"],
+        ["攝影社"],
+        ["桌遊社"],
+        ["籃球社"]
+      ],
+      "formula": "=WRAPROWS(A2:A6,2)",
+      "spill": [
+        ["熱舞社", "吉他社"],
+        ["攝影社", "桌遊社"],
+        ["籃球社", "#N/A"]
+      ],
+      "marks": [
+        { "at": 1, "range": "A2:A6", "kind": "range", "label": "五個社團" },
+        { "at": 2, "range": "A2:A3", "kind": "hit", "label": "第一列" },
+        { "at": 3, "range": "A6", "kind": "warn", "label": "落單了" }
+      ],
+      "showResultAt": 3,
+      "say": [
+        "這次有五個社團，每列放兩個。",
+        "A2 到 A6 共五筆，要排成三列。",
+        "第一列是熱舞社和吉他社，",
+        "最後一列只有籃球社，少一格，",
+        "沒填補值，空格就變成 #N/A。",
+        "第三個引數填兩個雙引號就好看了。"
+      ]
+    },
+    {
+      "type": "compare",
+      "title": "WRAPROWS vs WRAPCOLS",
+      "left": { "head": "WRAPROWS", "items": ["一列一列排", "先往右再往下", "數字是每列筆數", "適合座位表"] },
+      "right": { "head": "WRAPCOLS", "items": ["一欄一欄排", "先往下再往右", "數字是每欄筆數", "適合長名單分欄"] },
+      "say": [
+        "和 WRAPCOLS 比一比。",
+        "WRAPROWS 一列一列排，先往右再往下；",
+        "WRAPCOLS 一欄一欄排，先往下再往右。",
+        "數字的意思也不同，要看清楚喔。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        { "kind": "tip", "text": "補值填 \"\" 可去掉 #N/A", "at": 1 },
+        { "kind": "warn", "text": "來源只能是一欄或一列", "at": 2 },
+        { "kind": "tip", "text": "來源改變，結果自動更新", "at": 3 },
+        { "kind": "warn", "text": "溢出範圍要留空，否則 #SPILL!", "at": 4 }
+      ],
+      "say": [
+        "最後是幾個小提醒。",
+        "補值填空字串，就能去掉 #N/A。",
+        "來源必須是一欄或一列才行。",
+        "來源資料改了，結果會自動更新。",
+        "結果區要留空，不然會出現溢出錯誤。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "WRAPROWS(A2:A7,2) 的結果是幾列幾欄？",
+      "options": ["2 列 3 欄", "3 列 2 欄", "6 列 1 欄", "1 列 6 欄"],
+      "answer": 1,
+      "explain": "每列放 2 筆，六筆資料排成 3 列 2 欄。",
+      "say": [
+        "來個隨堂小測驗！",
+        "六筆資料，WRAPROWS 每列放兩筆，",
+        "結果會是幾列幾欄呢？",
+        "答案是三列兩欄！"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": ["一串資料折成多列", "先往右、再往下", "第二引數是每列筆數", "補值避免 #N/A"],
+      "say": [
+        "重點回顧一下。",
+        "WRAPROWS 把一串資料折成多列，",
+        "順序是先往右排，再往下換列。",
+        "記得加補值，表格就乾乾淨淨！"
+      ]
+    }
+  ]
+}

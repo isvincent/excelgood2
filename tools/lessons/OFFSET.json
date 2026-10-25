@@ -1,0 +1,176 @@
+{
+  "id": "OFFSET",
+  "name": "OFFSET",
+  "zh": "位移參照函數",
+  "en": "Shifted reference",
+  "category": "lookup",
+  "level": "進階",
+  "version": "所有版本",
+  "summary": "從起點儲存格往下、往右移動，傳回新的儲存格或範圍。",
+  "summary_en": "Return a cell or range shifted a number of rows and columns from a start.",
+  "syntax": "=OFFSET(reference, rows, cols, [height], [width])",
+  "slides": [
+    {
+      "type": "title",
+      "title": "OFFSET",
+      "subtitle": "從起點出發，移動取值",
+      "say": [
+        "哈囉！今天要學的是 OFFSET 函數。",
+        "它就像在工作表上走格子，",
+        "先站在一個起點，再往下往右移動，",
+        "最後把走到的那一格或那一塊拿回來。"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "OFFSET 能做什麼？",
+      "points": [
+        { "icon": "key", "text": "以一個儲存格當起點", "at": 1 },
+        { "icon": "arrow", "text": "往下往右移動幾格", "at": 2 },
+        { "icon": "grid", "text": "可傳回一整塊範圍", "at": 3 },
+        { "icon": "calc", "text": "搭配 SUM 做動態加總", "at": 4 }
+      ],
+      "say": [
+        "OFFSET 的重點有四個。",
+        "第一，先指定一個起點儲存格。",
+        "第二，告訴它要往下、往右移動幾格。",
+        "第三，它可以傳回一整塊範圍，",
+        "第四，搭配 SUM，就能做動態加總。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "OFFSET",
+      "args": [
+        { "name": "reference", "desc": "起點儲存格", "at": 1 },
+        { "name": "rows", "desc": "往下移幾列", "at": 2 },
+        { "name": "cols", "desc": "往右移幾欄", "at": 3 },
+        { "name": "height", "desc": "傳回幾列高", "optional": true, "at": 4 },
+        { "name": "width", "desc": "傳回幾欄寬", "optional": true, "at": 4 }
+      ],
+      "say": [
+        "來看語法，共有五個引數。",
+        "第一個是起點，也就是參照的儲存格。",
+        "第二個是往下移動幾列。",
+        "第三個是往右移動幾欄。",
+        "最後兩個是傳回範圍的高和寬，可省略。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：移動取出一格",
+      "header": ["月份", "業績(萬)"],
+      "rows": [
+        ["1月", "48"],
+        ["2月", "36"],
+        ["3月", "52"],
+        ["4月", "61"],
+        ["5月", "45"]
+      ],
+      "formula": "=OFFSET(A1,3,1)",
+      "result": "52",
+      "marks": [
+        { "at": 1, "range": "A1", "kind": "key", "label": "起點 A1" },
+        { "at": 2, "range": "A2:A4", "kind": "range", "label": "往下 3 列" },
+        { "at": 3, "range": "B4", "kind": "hit", "label": "往右 1 欄" },
+        { "at": 4, "range": "B4", "kind": "out", "label": "傳回結果" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這是一份業務部的每月業績表。",
+        "公式從 A1 出發，",
+        "先往下移三列，走到 A4 的三月，",
+        "再往右移一欄，來到 B4。",
+        "所以結果就是三月的業績，五十二！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：加總最近三個月",
+      "header": ["月份", "業績(萬)"],
+      "rows": [
+        ["1月", "48"],
+        ["2月", "36"],
+        ["3月", "52"],
+        ["4月", "61"],
+        ["5月", "45"]
+      ],
+      "formula": "=SUM(OFFSET(B1,3,0,3,1))",
+      "result": "158",
+      "marks": [
+        { "at": 1, "range": "B1", "kind": "key", "label": "起點 B1" },
+        { "at": 2, "range": "B4", "kind": "hit", "label": "往下 3 列" },
+        { "at": 3, "range": "B4:B6", "kind": "range", "label": "高 3 寬 1" },
+        { "at": 4, "range": "B4:B6", "kind": "out", "label": "加總" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這次要加總最近三個月的業績。",
+        "起點改成 B1 標題格，",
+        "往下移三列、不往右移，來到 B4。",
+        "高度給三、寬度給一，範圍就是 B4 到 B6。",
+        "SUM 加起來，得到一百五十八萬！"
+      ]
+    },
+    {
+      "type": "flow",
+      "title": "OFFSET 的運作流程",
+      "nodes": [
+        { "label": "站上起點", "sub": "reference", "at": 1 },
+        { "label": "往下移動", "sub": "rows 列", "at": 2 },
+        { "label": "往右移動", "sub": "cols 欄", "at": 3 },
+        { "label": "決定大小", "sub": "height × width", "at": 4 }
+      ],
+      "say": [
+        "我們把流程整理一下。",
+        "先站上起點儲存格，",
+        "依照 rows 往下移動，",
+        "再依照 cols 往右移動，",
+        "最後用高和寬，決定要拿多大一塊。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        { "kind": "tip", "text": "列欄填負數就往上往左", "at": 1 },
+        { "kind": "tip", "text": "省略高寬就和起點一樣大", "at": 2 },
+        { "kind": "warn", "text": "移出工作表會出現 #REF!", "at": 3 },
+        { "kind": "warn", "text": "每次重算都會更新，別濫用", "at": 4 }
+      ],
+      "say": [
+        "最後是幾個小提醒。",
+        "列數或欄數填負數，就會往上或往左移。",
+        "省略高和寬，範圍就跟起點一樣大。",
+        "移動到工作表外面，會出現參照錯誤。",
+        "它每次都會重算，大量使用會變慢喔。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "公式 =OFFSET(A1,2,1) 會傳回哪一格的內容？",
+      "options": ["A3", "B3", "C2", "B2"],
+      "answer": 1,
+      "explain": "從 A1 往下移 2 列到 A3，再往右移 1 欄，就是 B3。",
+      "say": [
+        "來個隨堂小測驗！",
+        "OFFSET 括號 A1、二、一，",
+        "會傳回哪一格的內容呢？",
+        "往下兩列到 A3，往右一欄，答案是 B3！"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": ["起點、往下、往右", "高寬決定範圍大小", "搭配 SUM 動態加總", "負數可往上往左"],
+      "say": [
+        "重點回顧一下。",
+        "記住三步驟：起點、往下、往右。",
+        "再用高和寬，決定範圍大小。",
+        "學會 OFFSET，動態範圍輕鬆搞定！"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "id": "XLOOKUP",
+  "name": "XLOOKUP",
+  "zh": "萬用查找函數",
+  "en": "Modern lookup",
+  "category": "lookup",
+  "level": "進階",
+  "version": "Microsoft 365 / Excel 2021",
+  "summary": "用一個鍵值，在一欄中找到位置，再從另一欄傳回對應資料。",
+  "summary_en": "Find a key in one column and return the matching value from another.",
+  "syntax": "=XLOOKUP(lookup_value, lookup_array, return_array, [if_not_found], [match_mode], [search_mode])",
+  "slides": [
+    {
+      "type": "title",
+      "title": "XLOOKUP",
+      "subtitle": "一個函數，搞定所有查找",
+      "say": [
+        "哈囉！今天要學的是 XLOOKUP 函數。",
+        "它是新一代的萬用查找函數，",
+        "能取代 VLOOKUP 和 HLOOKUP，",
+        "而且更簡單、更不容易出錯。"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "XLOOKUP 能做什麼？",
+      "points": [
+        { "icon": "search", "text": "在查找範圍中找到鍵值", "at": 1 },
+        { "icon": "arrow", "text": "從傳回範圍取出同列資料", "at": 2 },
+        { "icon": "shield", "text": "找不到時可自訂訊息", "at": 3 },
+        { "icon": "swap", "text": "可往左、往右、往上找", "at": 4 }
+      ],
+      "say": [
+        "XLOOKUP 的工作可以分成四件事。",
+        "第一，在查找範圍中找到你要的鍵值。",
+        "第二，從傳回範圍取出同一列的資料。",
+        "第三，找不到時，可以顯示自訂訊息。",
+        "第四，它不限方向，往左往右都能找。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "XLOOKUP",
+      "args": [
+        { "name": "lookup_value", "desc": "要找的值", "at": 1 },
+        { "name": "lookup_array", "desc": "在哪一欄找", "at": 2 },
+        { "name": "return_array", "desc": "要傳回哪一欄", "at": 3 },
+        { "name": "if_not_found", "desc": "找不到時顯示", "optional": true, "at": 4 },
+        { "name": "match_mode", "desc": "比對方式", "optional": true, "at": 5 },
+        { "name": "search_mode", "desc": "搜尋方向", "optional": true, "at": 5 }
+      ],
+      "say": [
+        "來看語法，共有六個引數。",
+        "第一個是要找的值。",
+        "第二個是查找範圍，也就是在哪一欄找。",
+        "第三個是傳回範圍，要拿哪一欄的資料。",
+        "第四個是找不到時要顯示的文字。",
+        "後面兩個是比對方式和搜尋方向，可以省略。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：用編號查姓名",
+      "header": ["員工編號", "姓名", "部門", "分機"],
+      "rows": [
+        ["E01", "王小明", "業務部", "201"],
+        ["E02", "林美華", "總務部", "305"],
+        ["E03", "陳大文", "資訊部", "412"],
+        ["E04", "張雅婷", "人事部", "118"],
+        ["E05", "李志豪", "業務部", "202"]
+      ],
+      "formula": "=XLOOKUP(\"E03\",A2:A6,B2:B6)",
+      "result": "陳大文",
+      "marks": [
+        { "at": 1, "range": "A2:A6", "kind": "range", "label": "查找範圍" },
+        { "at": 2, "range": "B2:B6", "kind": "key", "label": "傳回範圍" },
+        { "at": 3, "range": "A4", "kind": "hit", "label": "找到 E03" },
+        { "at": 4, "range": "B4", "kind": "out", "label": "傳回結果" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "我們要用員工編號 E03 查出姓名。",
+        "查找範圍是 A2 到 A6 的員工編號。",
+        "傳回範圍是 B2 到 B6 的姓名。",
+        "XLOOKUP 在第四列找到了 E03，",
+        "於是傳回同一列的姓名：陳大文！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：往左查 + 找不到",
+      "header": ["姓名", "分機", "員工編號"],
+      "rows": [
+        ["王小明", "201", "E01"],
+        ["林美華", "305", "E02"],
+        ["陳大文", "412", "E03"]
+      ],
+      "formula": "=XLOOKUP(\"E09\",C2:C4,A2:A4,\"查無此人\")",
+      "result": "查無此人",
+      "marks": [
+        { "at": 1, "range": "C2:C4", "kind": "range", "label": "查找範圍在右邊" },
+        { "at": 1, "range": "A2:A4", "kind": "key", "label": "傳回範圍在左邊" },
+        { "at": 3, "range": "C2:C4", "kind": "warn", "label": "沒有 E09" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這次編號在右邊，姓名在左邊。",
+        "VLOOKUP 不能往左查，XLOOKUP 可以！",
+        "我們故意找一個不存在的 E09。",
+        "整欄都找不到 E09，",
+        "就會顯示第四個引數：查無此人。"
+      ]
+    },
+    {
+      "type": "flow",
+      "title": "XLOOKUP 的運作流程",
+      "nodes": [
+        { "label": "拿到鍵值", "sub": "lookup_value", "at": 1 },
+        { "label": "逐列比對", "sub": "lookup_array", "at": 2 },
+        { "label": "記住位置", "sub": "第幾列", "at": 3 },
+        { "label": "取出資料", "sub": "return_array", "at": 4 }
+      ],
+      "say": [
+        "我們把流程整理一下。",
+        "先拿到要找的鍵值，",
+        "在查找範圍裡逐列比對，",
+        "找到後記住它在第幾列，",
+        "最後從傳回範圍取出同一列的資料。"
+      ]
+    },
+    {
+      "type": "compare",
+      "title": "XLOOKUP vs VLOOKUP",
+      "left": { "head": "VLOOKUP", "items": ["只能往右查", "要數欄位編號", "預設近似比對", "插入欄位會出錯"] },
+      "right": { "head": "XLOOKUP", "items": ["任何方向都能查", "直接選傳回範圍", "預設完全比對", "插入欄位也不怕"] },
+      "say": [
+        "和 VLOOKUP 比一比。",
+        "VLOOKUP 只能往右查，還要數欄位編號；",
+        "XLOOKUP 直接選範圍，任何方向都行。",
+        "而且它預設完全比對，比較不會出錯。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        { "kind": "tip", "text": "兩個範圍的列數要相同", "at": 1 },
+        { "kind": "tip", "text": "match_mode 填 -1 找較小的近似值", "at": 2 },
+        { "kind": "tip", "text": "search_mode 填 -1 從最後一筆找", "at": 3 },
+        { "kind": "warn", "text": "舊版 Excel 2019 以前沒有此函數", "at": 4 }
+      ],
+      "say": [
+        "最後是幾個小提醒。",
+        "查找範圍和傳回範圍的列數必須相同。",
+        "比對方式填負一，可找較小的近似值。",
+        "搜尋方向填負一，會從最後一筆往上找。",
+        "注意，Excel 2019 以前的版本沒有它喔。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "要讓 XLOOKUP 找不到時顯示「無資料」，應該填在第幾個引數？",
+      "options": ["第二個", "第三個", "第四個", "第六個"],
+      "answer": 2,
+      "explain": "第四個引數 if_not_found 就是找不到時要顯示的內容。",
+      "say": [
+        "來個隨堂小測驗！",
+        "找不到時要顯示「無資料」，",
+        "應該填在第幾個引數呢？",
+        "答案是第四個引數，if_not_found！"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": ["找值、查範圍、傳回範圍", "任何方向都能查", "第四引數處理找不到", "取代 VLOOKUP 的好選擇"],
+      "say": [
+        "重點回顧一下。",
+        "記住三個核心引數：找值、查找範圍、傳回範圍。",
+        "它不限方向，還能處理找不到的情況。",
+        "學會 XLOOKUP，查表變得超輕鬆！"
+      ]
+    }
+  ]
+}

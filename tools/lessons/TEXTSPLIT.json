@@ -1,0 +1,320 @@
+{
+  "id": "TEXTSPLIT",
+  "name": "TEXTSPLIT",
+  "zh": "文字拆分函數",
+  "en": "Split text",
+  "category": "text",
+  "level": "進階",
+  "version": "Microsoft 365",
+  "summary": "依分隔符號把一段文字拆成多欄或多列，結果自動溢出。",
+  "summary_en": "Split text into columns and rows by delimiters as a spilled array.",
+  "syntax": "=TEXTSPLIT(text, col_delimiter, [row_delimiter], [ignore_empty], [match_mode], [pad_with])",
+  "slides": [
+    {
+      "type": "title",
+      "title": "TEXTSPLIT",
+      "subtitle": "一段文字拆成一張表",
+      "say": [
+        "哈囉！今天要學的是 TEXTSPLIT 函數。",
+        "一長串用逗號隔開的名單，",
+        "以前要用資料剖析，一步一步拆。",
+        "TEXTSPLIT 一個公式就拆成表格！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "TEXTSPLIT 能做什麼？",
+      "points": [
+        {
+          "icon": "cut",
+          "text": "依符號拆成多欄",
+          "at": 1
+        },
+        {
+          "icon": "grid",
+          "text": "也能同時拆成多列",
+          "at": 2
+        },
+        {
+          "icon": "filter",
+          "text": "可略過空白項目",
+          "at": 3
+        },
+        {
+          "icon": "zap",
+          "text": "原文一改自動重拆",
+          "at": 4
+        }
+      ],
+      "say": [
+        "TEXTSPLIT 有四個重點。",
+        "第一，依照分隔符號，拆成好幾欄。",
+        "第二，給它列分隔符號，還能拆成多列。",
+        "第三，可以略過連續符號造成的空白。",
+        "第四，原始文字一改，結果自動重拆。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "TEXTSPLIT",
+      "args": [
+        {
+          "name": "text",
+          "desc": "要拆的文字",
+          "at": 1
+        },
+        {
+          "name": "col_delimiter",
+          "desc": "欄分隔符號",
+          "at": 1
+        },
+        {
+          "name": "row_delimiter",
+          "desc": "列分隔符號",
+          "optional": true,
+          "at": 2
+        },
+        {
+          "name": "ignore_empty",
+          "desc": "略過空白",
+          "optional": true,
+          "at": 3
+        },
+        {
+          "name": "match_mode",
+          "desc": "大小寫比對",
+          "optional": true,
+          "at": 4
+        },
+        {
+          "name": "pad_with",
+          "desc": "空位補什麼",
+          "optional": true,
+          "at": 4
+        }
+      ],
+      "say": [
+        "來看語法，共有六個引數。",
+        "前兩個是要拆的文字和欄分隔符號。",
+        "第三個是列分隔符號，用來換列。",
+        "第四個填 TRUE，會略過空白項目。",
+        "最後兩個是比對方式和空位補的值。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：名單拆成多欄",
+      "header": [
+        "值日生名單"
+      ],
+      "rows": [
+        [
+          "王小明,林美華,陳大文"
+        ]
+      ],
+      "formula": "=TEXTSPLIT(A2,\",\")",
+      "spill": [
+        [
+          "王小明",
+          "林美華",
+          "陳大文"
+        ]
+      ],
+      "marks": [
+        {
+          "at": 1,
+          "range": "A2",
+          "kind": "range",
+          "label": "要拆的文字"
+        }
+      ],
+      "showResultAt": 3,
+      "say": [
+        "A2 是用逗號隔開的值日生名單。",
+        "第一個引數選 A2，",
+        "第二個引數是逗號，當作欄分隔符號。",
+        "三個名字就往右溢出，各佔一欄！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：拆成多欄又多列",
+      "header": [
+        "成績紀錄"
+      ],
+      "rows": [
+        [
+          "王小明,85;林美華,92;陳大文,78"
+        ]
+      ],
+      "formula": "=TEXTSPLIT(A2,\",\",\";\")",
+      "spill": [
+        [
+          "王小明",
+          "85"
+        ],
+        [
+          "林美華",
+          "92"
+        ],
+        [
+          "陳大文",
+          "78"
+        ]
+      ],
+      "marks": [
+        {
+          "at": 1,
+          "range": "A2",
+          "kind": "range",
+          "label": "姓名和分數"
+        }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這次的文字裡有逗號，也有分號。",
+        "逗號隔開姓名和分數，分號隔開每個人。",
+        "第二個引數填逗號，當欄分隔符號，",
+        "第三個引數填分號，當列分隔符號。",
+        "一段文字，馬上變成三列兩欄的表格！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例三：略過空白項目",
+      "header": [
+        "考試科目"
+      ],
+      "rows": [
+        [
+          "國文,,數學,英文"
+        ]
+      ],
+      "formula": "=TEXTSPLIT(A2,\",\",,TRUE)",
+      "spill": [
+        [
+          "國文",
+          "數學",
+          "英文"
+        ]
+      ],
+      "marks": [
+        {
+          "at": 1,
+          "range": "A2",
+          "kind": "warn",
+          "label": "連續逗號"
+        }
+      ],
+      "showResultAt": 3,
+      "say": [
+        "國文後面不小心多打了一個逗號。",
+        "直接拆的話，中間會多出一格空白。",
+        "第三個引數空著，第四個填 TRUE，",
+        "空白被略過，只剩國文、數學、英文！"
+      ]
+    },
+    {
+      "type": "flow",
+      "title": "TEXTSPLIT 的運作流程",
+      "nodes": [
+        {
+          "label": "讀取文字",
+          "sub": "text",
+          "at": 1
+        },
+        {
+          "label": "切成多列",
+          "sub": "列分隔符號",
+          "at": 2
+        },
+        {
+          "label": "再切成欄",
+          "sub": "欄分隔符號",
+          "at": 3
+        },
+        {
+          "label": "溢出表格",
+          "sub": "自動填滿",
+          "at": 4
+        }
+      ],
+      "say": [
+        "我們把流程整理一下。",
+        "先讀取整段文字，",
+        "遇到列分隔符號，就切成新的一列，",
+        "每一列再依欄分隔符號切成好幾欄，",
+        "最後溢出成一張完整的表格。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        {
+          "kind": "tip",
+          "text": "多種符號可用 {\",\",\"、\"}",
+          "at": 1
+        },
+        {
+          "kind": "tip",
+          "text": "pad_with 補齊長短不一",
+          "at": 2
+        },
+        {
+          "kind": "warn",
+          "text": "拆出的數字是文字格式",
+          "at": 3
+        },
+        {
+          "kind": "warn",
+          "text": "目前只有 Microsoft 365",
+          "at": 4
+        }
+      ],
+      "say": [
+        "最後是幾個小提醒。",
+        "有好幾種分隔符號，可以用大括號一起給。",
+        "每列長短不一時，用 pad_with 補空位。",
+        "拆出來的數字是文字，計算前要轉換。",
+        "注意，目前要 Microsoft 365 才有喔。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "TEXTSPLIT 要把文字拆成多列，分隔符號應該填在第幾個引數？",
+      "options": [
+        "第一個",
+        "第二個",
+        "第三個",
+        "第四個"
+      ],
+      "answer": 2,
+      "explain": "第三個引數 row_delimiter 是列分隔符號，用來換列。",
+      "say": [
+        "來個隨堂小測驗！",
+        "要把文字拆成多列，",
+        "分隔符號應該填在第幾個引數呢？",
+        "答案是第三個引數，row_delimiter！"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": [
+        "第二引數拆成多欄",
+        "第三引數拆成多列",
+        "第四引數略過空白",
+        "一段文字變成表格"
+      ],
+      "say": [
+        "重點回顧一下。",
+        "第二個引數拆欄，第三個引數拆列。",
+        "第四個填 TRUE，可以略過空白項目。",
+        "學會 TEXTSPLIT，整理文字超快速！"
+      ]
+    }
+  ]
+}

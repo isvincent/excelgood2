@@ -1,0 +1,170 @@
+{
+  "id": "MATCH",
+  "name": "MATCH",
+  "zh": "找出位置函數",
+  "en": "Find position",
+  "category": "lookup",
+  "level": "基礎",
+  "version": "所有版本",
+  "summary": "找出某個值在範圍中排第幾個，傳回位置編號。",
+  "summary_en": "Return the relative position of a value within a range.",
+  "syntax": "=MATCH(lookup_value, lookup_array, [match_type])",
+  "slides": [
+    {
+      "type": "title",
+      "title": "MATCH",
+      "subtitle": "它在第幾個？問我就對了",
+      "say": [
+        "哈囉！今天要學的是 MATCH 函數。",
+        "它不是傳回資料本身，",
+        "而是告訴你資料排在第幾個。",
+        "搭配 INDEX，就是查表的黃金組合！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "MATCH 能做什麼？",
+      "points": [
+        { "icon": "search", "text": "在範圍中尋找值", "at": 1 },
+        { "icon": "tag", "text": "傳回位置編號", "at": 2 },
+        { "icon": "sort", "text": "可做近似比對", "at": 3 },
+        { "icon": "link", "text": "把位置交給 INDEX", "at": 4 }
+      ],
+      "say": [
+        "MATCH 的重點有四個。",
+        "第一，它在一欄或一列裡尋找某個值。",
+        "第二，傳回的是位置，也就是第幾個。",
+        "第三，它也能做區間的近似比對。",
+        "第四，位置可以交給 INDEX 取出資料。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "MATCH",
+      "args": [
+        { "name": "lookup_value", "desc": "要找的值", "at": 1 },
+        { "name": "lookup_array", "desc": "在哪裡找", "at": 2 },
+        { "name": "match_type", "desc": "0 完全／1 近似", "optional": true, "at": 3 }
+      ],
+      "say": [
+        "來看語法，共有三個引數。",
+        "第一個是要找的值。",
+        "第二個是查找範圍，在哪一欄找。",
+        "第三個是比對方式，零是完全比對。",
+        "注意，省略的話預設是 1，近似比對喔。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：陳大文排第幾？",
+      "header": ["座號", "姓名", "數學"],
+      "rows": [
+        ["1", "王小明", "75"],
+        ["2", "林美華", "81"],
+        ["3", "陳大文", "94"],
+        ["4", "張雅婷", "68"],
+        ["5", "李志豪", "90"]
+      ],
+      "formula": "=MATCH(\"陳大文\",B2:B6,0)",
+      "result": "3",
+      "marks": [
+        { "at": 1, "range": "B2:B6", "kind": "range", "label": "查找範圍" },
+        { "at": 2, "range": "B4", "kind": "hit", "label": "第 3 個" }
+      ],
+      "showResultAt": 3,
+      "say": [
+        "我們要找陳大文在名單中排第幾。",
+        "查找範圍是 B2 到 B6，比對方式填零。",
+        "從 B2 開始數，陳大文在第三個。",
+        "所以 MATCH 傳回位置 3！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：近似比對找級距",
+      "header": ["分數下限", "等第"],
+      "rows": [
+        ["0", "丁"],
+        ["60", "丙"],
+        ["70", "乙"],
+        ["80", "甲"],
+        ["90", "優"]
+      ],
+      "formula": "=MATCH(76,A2:A6,1)",
+      "result": "3",
+      "marks": [
+        { "at": 1, "range": "A2:A6", "kind": "range", "label": "由小到大" },
+        { "at": 2, "range": "A5", "kind": "warn", "label": "80 太大" },
+        { "at": 3, "range": "A4", "kind": "hit", "label": "≤76 最大" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "比對方式填 1，可以用來找分數級距。",
+        "分數下限必須由小到大排好。",
+        "我們找七十六分，八十已經太大了。",
+        "不超過七十六的最大值是七十，",
+        "它在第三個，所以傳回 3。"
+      ]
+    },
+    {
+      "type": "build",
+      "title": "黃金組合：INDEX + MATCH",
+      "parts": [
+        { "text": "=INDEX(C2:C6,", "note": "要傳回數學欄", "at": 1 },
+        { "text": "MATCH(\"陳大文\",B2:B6,0)", "note": "算出第 3 列", "at": 2 },
+        { "text": ")", "note": "取出第 3 格", "at": 3 }
+      ],
+      "result": "94",
+      "say": [
+        "把 MATCH 和 INDEX 組合起來吧！",
+        "外層 INDEX 指定要傳回數學欄。",
+        "裡面的 MATCH 找出陳大文在第三列。",
+        "INDEX 再取出第三格，",
+        "就查到陳大文的數學成績：94 分！"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        { "kind": "warn", "text": "精確查找一定要填 0", "at": 1 },
+        { "kind": "tip", "text": "填 1 時資料要由小到大", "at": 2 },
+        { "kind": "warn", "text": "找不到會出現 #N/A", "at": 3 },
+        { "kind": "tip", "text": "不分大小寫英文字母", "at": 4 }
+      ],
+      "say": [
+        "最後是幾個小提醒。",
+        "要找完全一樣的值，第三個引數一定填零。",
+        "填 1 的時候，資料要由小到大排序。",
+        "找不到的話，會出現 #N/A 錯誤。",
+        "另外，MATCH 不區分英文大小寫。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "用範例一的名單，=MATCH(\"張雅婷\",B2:B6,0) 結果是？",
+      "options": ["2", "4", "5", "張雅婷"],
+      "answer": 1,
+      "explain": "張雅婷在範圍中排第 4 個，MATCH 傳回位置 4。",
+      "say": [
+        "來個隨堂小測驗！",
+        "用 MATCH 找張雅婷在名單中的位置，",
+        "會傳回什麼呢？",
+        "答案是 4，MATCH 傳回的是位置！"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": ["傳回的是位置編號", "精確查找填 0", "填 1 找區間級距", "和 INDEX 黃金組合"],
+      "say": [
+        "重點回顧一下。",
+        "MATCH 傳回的是位置，不是資料本身。",
+        "精確查找填零，找級距填 1。",
+        "搭配 INDEX，任何查表都難不倒你！"
+      ]
+    }
+  ]
+}

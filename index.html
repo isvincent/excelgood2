@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Excel 函數動畫教室</title>
+<meta name="description" content="39 個 Excel 函數的 9:16 自動播放動畫教學影片：分類瀏覽、即時搜尋、配音字幕、隨堂測驗。">
+<meta name="theme-color" content="#107C41">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Excel 函數教室">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Excel 函數動畫教室">
+      <svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><rect x="2" y="2" width="44" height="44" rx="13" fill="#107C41"/><path d="M14 14l9 10-9 10M24 14l9 10-9 10" stroke="#fff" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".35"/><text x="24" y="33" text-anchor="middle" font-family="JetBrains Mono,monospace" font-weight="800" font-size="22" fill="#fff">fx</text></svg>
+      <span><b data-i18n="brand">Excel 函數動畫教室</b><small data-i18n="brandSub">39 支 9:16 教學影片</small></span>
+    </a>
+    <div class="top-actions">
+      <div class="ring" id="ring" title="學習進度"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" class="rbg"/><circle cx="18" cy="18" r="15" class="rfg" id="ringFg"/></svg><span id="ringTxt">0/39</span></div>
+      <button class="iconbtn" id="btnSettings" aria-label="顯示與操作設定" data-sfx><span class="gear">⚙️</span><span class="lbl" data-i18n="settings">設定</span></button>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="hero-txt">
+      <p class="kicker" data-i18n="kicker">看動畫、聽講解、做測驗</p>
+      <h1 data-i18n-html="heroTitle">把 Excel 函數<br><span class="hl">變成會說話的動畫</span></h1>
+      <p class="lead" data-i18n="heroLead">每個函數一支直式教學影片：小格老師配音講解、逐句字幕、工作表動畫示範，看完還有隨堂小測驗。</p>
+      <label class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+        <input id="q" type="search" autocomplete="off" data-i18n-ph="searchPh" placeholder="搜尋函數名稱或用途，例如：查找、日期、文字…">
+        <kbd>/</kbd>
+      </label>
+      <div class="quick" id="quick"></div>
+      <div class="stats" id="stats"></div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 520 520" id="heroSvg">
+        <defs><filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="10" stdDeviation="0" flood-color="rgba(0,0,0,.12)"/></filter></defs>
+        <circle cx="260" cy="260" r="230" fill="#FFE7A3" opacity=".7"/>
+        <circle cx="400" cy="110" r="60" fill="#FFB4CF" opacity=".8" class="float1"/>
+        <circle cx="90" cy="420" r="44" fill="#A9D8FF" opacity=".9" class="float2"/>
+        <g filter="url(#sh)">
+          <rect x="70" y="120" width="380" height="300" rx="28" fill="#fff"/>
+          <rect x="70" y="120" width="380" height="58" rx="28" fill="#107C41"/>
+          <rect x="70" y="150" width="380" height="28" fill="#107C41"/>
+          <text x="100" y="158" font-family="Georgia,serif" font-style="italic" font-weight="800" font-size="26" fill="#fff">fx</text>
+          <text x="146" y="158" font-family="JetBrains Mono,monospace" font-weight="800" font-size="17" fill="#fff" id="heroFormula">=XLOOKUP(</text>
+        </g>
+        <g id="heroGrid"></g>
+        <g class="chip c1"><rect x="20" y="70" width="150" height="54" rx="27" fill="#1E78E0"/><text x="95" y="105" text-anchor="middle" font-family="JetBrains Mono,monospace" font-weight="800" font-size="22" fill="#fff">FILTER</text></g>
+        <g class="chip c2"><rect x="360" y="400" width="140" height="54" rx="27" fill="#E23D74"/><text x="430" y="435" text-anchor="middle" font-family="JetBrains Mono,monospace" font-weight="800" font-size="22" fill="#fff">MID</text></g>
+        <g class="chip c3"><rect x="380" y="200" width="130" height="54" rx="27" fill="#EE7A00"/><text x="445" y="235" text-anchor="middle" font-family="JetBrains Mono,monospace" font-weight="800" font-size="22" fill="#fff">TAKE</text></g>
+        <g class="chip c4"><rect x="10" y="300" width="130" height="54" rx="27" fill="#6E4BF0"/><text x="75" y="335" text-anchor="middle" font-family="JetBrains Mono,monospace" font-weight="800" font-size="22" fill="#fff">SUMIF</text></g>
+      </svg>
+    </div>
+  </section>
+
+  <div class="layout">
+    <aside class="side" id="side">
+      <h2 class="side-h" data-i18n="cats">函數分類</h2>
+      <div class="cats" id="cats" role="tablist"></div>
+      <div class="filters">
+        <div class="seg" id="lvl"></div>
+        <select id="sort" aria-label="排序"></select>
+        <label class="chk"><input type="checkbox" id="onlyNew"><span data-i18n="onlyNew">只看未完成</span></label>
+        <button class="btn ghost" id="btnRandom" data-sfx><span>🎲</span><span data-i18n="random">隨機挑一個</span></button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="result-bar"><h2 id="resultTitle"></h2><span id="resultCount"></span></div>
+      <div class="grid" id="grid"></div>
+      <div class="empty" id="empty" hidden>
+        <svg viewBox="0 0 120 120"><rect x="16" y="22" width="88" height="76" rx="14" fill="var(--card)" stroke="var(--line)" stroke-width="4"/><path d="M16 46h88M46 22v76M76 22v76" stroke="var(--line)" stroke-width="4"/><circle cx="84" cy="84" r="20" fill="#FFD54A"/><path d="M78 78l12 12M90 78L78 90" stroke="#1F2433" stroke-width="4" stroke-linecap="round"/></svg>
+        <p data-i18n="empty">找不到符合的函數，換個關鍵字試試看！</p>
+      </div>
+
+      <section class="game" id="game">
+        <div class="game-head">
+          <div>
+            <h2 data-i18n="gameTitle">函數配對挑戰</h2>
+            <p data-i18n="gameSub">看任務描述，選出最適合的函數。連續答對會累積連擊！</p>
+          </div>
+          <div class="score"><span data-i18n="score">得分</span><b id="gScore">0</b><span data-i18n="combo">連擊</span><b id="gCombo">0</b></div>
+        </div>
+        <div class="game-card">
+          <p class="game-q" id="gQ"></p>
+          <div class="game-opts" id="gOpts"></div>
+          <div class="game-foot"><span id="gMsg"></span><button class="btn" id="gNext" data-sfx data-i18n="nextQ">下一題</button></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="foot">
+    <p data-i18n="foot">影片使用瀏覽器內建語音合成（女聲、1.15 倍速）。建議使用 Chrome 或 Edge，可安裝為 App 離線使用。</p>
+  </footer>
+</div>
+
+<!-- detail modal -->
+<div class="modal" id="modal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="mName">
+    <button class="close" id="mClose" aria-label="關閉">✕</button>
+    <div class="m-top"><span class="m-cat" id="mCat"></span><span class="m-lv" id="mLv"></span><span class="m-ver" id="mVer"></span></div>
+    <h2 class="m-name" id="mName"></h2>
+    <p class="m-zh" id="mZh"></p>
+    <p class="m-sum" id="mSum"></p>
+    <pre class="m-syn" id="mSyn"></pre>
+    <div class="m-body">
+      <div class="m-phone" id="mPhone"></div>
+      <div>
+        <h3 data-i18n="outline">影片章節</h3>
+        <ol class="m-outline" id="mOutline"></ol>
+      </div>
+    </div>
+    <div class="m-actions">
+      <a class="btn big" id="mPlay" href="#"><svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M6 4l14 8-14 8z"/></svg><span data-i18n="play">播放教學影片</span></a>
+      <button class="btn ghost" id="mCopy" data-sfx><span data-i18n="copy">複製語法</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- settings drawer -->
+<div class="drawer-bg" id="drawerBg" hidden></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-labelledby="setTitle">
+  <div class="drawer-head"><h2 id="setTitle" data-i18n="setTitle">⚙️ 顯示與操作設定</h2><button class="close" id="dClose" aria-label="關閉">✕</button></div>
+  <div class="set" data-key="fullscreen"><h3><span>⛶</span><span data-i18n="sFull">全螢幕</span></h3><div class="opts"></div></div>
+  <div class="set" data-key="sound"><h3><span>🔊</span><span data-i18n="sSound">音效</span></h3><div class="opts"></div></div>
+  <div class="set" data-key="device"><h3><span>📱</span><span data-i18n="sDevice">裝置</span></h3><div class="opts"></div></div>
+  <div class="set" data-key="layout"><h3><span>🧭</span><span data-i18n="sLayout">版面</span></h3><div class="opts"></div></div>
+  <div class="set" data-key="lang"><h3><span>🌐</span><span data-i18n="sLang">語言</span></h3><div class="opts"></div></div>
+  <div class="set" data-key="font"><h3><span>🔤</span><span data-i18n="sFont">字體</span></h3><div class="opts"></div></div>
+  <div class="set" data-key="theme"><h3><span>🎨</span><span data-i18n="sTheme">色系</span></h3><div class="opts"></div></div>
+  <button class="btn ghost wide" id="reset" data-sfx data-i18n="reset">恢復預設值</button>
+</aside>
+
+<div class="toast" id="toast" role="status"></div>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

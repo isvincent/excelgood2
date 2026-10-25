@@ -1,0 +1,296 @@
+{
+  "id": "TEXTAFTER",
+  "name": "TEXTAFTER",
+  "zh": "取分隔符後文字",
+  "en": "Text after delimiter",
+  "category": "text",
+  "level": "進階",
+  "version": "Microsoft 365",
+  "summary": "取出指定分隔符號後面的文字，拆代碼、地址超方便。",
+  "summary_en": "Return the text that comes after a given delimiter.",
+  "syntax": "=TEXTAFTER(text, delimiter, [instance_num], [match_mode], [match_end], [if_not_found])",
+  "slides": [
+    {
+      "type": "title",
+      "title": "TEXTAFTER",
+      "subtitle": "取出符號後面的文字",
+      "say": [
+        "哈囉！今天要學的是 TEXTAFTER 函數。",
+        "以前要取出某個符號後面的文字，",
+        "得用 MID 加 FIND，算得頭昏眼花。",
+        "TEXTAFTER 只要告訴它符號就好！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "TEXTAFTER 能做什麼？",
+      "points": [
+        {
+          "icon": "cut",
+          "text": "取出分隔符後的文字",
+          "at": 1
+        },
+        {
+          "icon": "list",
+          "text": "可指定第幾個分隔符",
+          "at": 2
+        },
+        {
+          "icon": "arrow",
+          "text": "負數代表從後面數",
+          "at": 3
+        },
+        {
+          "icon": "shield",
+          "text": "找不到時可自訂訊息",
+          "at": 4
+        }
+      ],
+      "say": [
+        "TEXTAFTER 有四個重點。",
+        "第一，取出分隔符號後面的文字。",
+        "第二，可以指定要從第幾個符號切。",
+        "第三，填負數，代表從後面開始數。",
+        "第四，找不到符號時，可以顯示自訂訊息。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "TEXTAFTER",
+      "args": [
+        {
+          "name": "text",
+          "desc": "原始文字",
+          "at": 1
+        },
+        {
+          "name": "delimiter",
+          "desc": "分隔符號",
+          "at": 1
+        },
+        {
+          "name": "instance_num",
+          "desc": "第幾個符號",
+          "optional": true,
+          "at": 2
+        },
+        {
+          "name": "match_mode",
+          "desc": "大小寫比對",
+          "optional": true,
+          "at": 3
+        },
+        {
+          "name": "match_end",
+          "desc": "結尾當分隔",
+          "optional": true,
+          "at": 3
+        },
+        {
+          "name": "if_not_found",
+          "desc": "找不到時顯示",
+          "optional": true,
+          "at": 4
+        }
+      ],
+      "say": [
+        "來看語法，前兩個引數是必填的。",
+        "原始文字，和要找的分隔符號。",
+        "第三個是第幾個符號，預設是第一個。",
+        "第四、第五個是進階比對設定。",
+        "第六個是找不到符號時要顯示的文字。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：取出商品名稱",
+      "header": [
+        "商品代碼"
+      ],
+      "rows": [
+        [
+          "A01-筆記本"
+        ],
+        [
+          "B12-原子筆"
+        ],
+        [
+          "C07-便利貼"
+        ]
+      ],
+      "formula": "=TEXTAFTER(A2:A4,\"-\")",
+      "spill": [
+        [
+          "筆記本"
+        ],
+        [
+          "原子筆"
+        ],
+        [
+          "便利貼"
+        ]
+      ],
+      "marks": [
+        {
+          "at": 1,
+          "range": "A2:A4",
+          "kind": "range",
+          "label": "商品代碼"
+        },
+        {
+          "at": 2,
+          "range": "A2",
+          "kind": "hit",
+          "label": "減號後面"
+        }
+      ],
+      "showResultAt": 3,
+      "say": [
+        "代碼和品名用減號連在一起。",
+        "我們直接選 A2 到 A4 整欄，",
+        "分隔符號是減號，取它後面的文字。",
+        "三個品名一次溢出：筆記本、原子筆、便利貼！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：從後面數取路名",
+      "header": [
+        "地址"
+      ],
+      "rows": [
+        [
+          "桃園市-楊梅區-秀才路"
+        ]
+      ],
+      "formula": "=TEXTAFTER(A2,\"-\",-1)",
+      "result": "秀才路",
+      "marks": [
+        {
+          "at": 1,
+          "range": "A2",
+          "kind": "range",
+          "label": "兩個減號"
+        },
+        {
+          "at": 3,
+          "range": "A2",
+          "kind": "hit",
+          "label": "最後一個"
+        }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這個地址裡有兩個減號。",
+        "如果第三個引數不填，從第一個減號切，",
+        "會得到楊梅區、減號、秀才路。",
+        "第三個引數填負一，從最後一個切，",
+        "就只取出最後的路名：秀才路！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例三：找不到分隔符號",
+      "header": [
+        "商品代碼"
+      ],
+      "rows": [
+        [
+          "A01-筆記本"
+        ],
+        [
+          "B12原子筆"
+        ],
+        [
+          "C07-便利貼"
+        ]
+      ],
+      "formula": "=TEXTAFTER(A3,\"-\",,,,\"格式錯誤\")",
+      "result": "格式錯誤",
+      "marks": [
+        {
+          "at": 1,
+          "range": "A3",
+          "kind": "warn",
+          "label": "沒有減號"
+        }
+      ],
+      "showResultAt": 3,
+      "say": [
+        "A3 的代碼少打了減號。",
+        "找不到分隔符號，預設會出現 N/A。",
+        "中間的引數空著，第六個填格式錯誤，",
+        "結果就會友善地顯示：格式錯誤。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        {
+          "kind": "tip",
+          "text": "選整欄就能一次溢出",
+          "at": 1
+        },
+        {
+          "kind": "tip",
+          "text": "取前面文字用 TEXTBEFORE",
+          "at": 2
+        },
+        {
+          "kind": "tip",
+          "text": "match_mode 填 1 不分大小寫",
+          "at": 3
+        },
+        {
+          "kind": "warn",
+          "text": "目前只有 Microsoft 365",
+          "at": 4
+        }
+      ],
+      "say": [
+        "最後是幾個小提醒。",
+        "第一個引數選整欄，結果會一次溢出。",
+        "想取符號前面的文字，用 TEXTBEFORE。",
+        "比對方式填一，英文就不分大小寫。",
+        "注意，目前要 Microsoft 365 才有喔。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "A2 是「YM-114-025」，TEXTAFTER(A2,\"-\",-1) 傳回？",
+      "options": [
+        "YM",
+        "114",
+        "025",
+        "114-025"
+      ],
+      "answer": 2,
+      "explain": "負一代表從最後一個減號切，後面只剩 025。",
+      "say": [
+        "來個隨堂小測驗！",
+        "文字是 YM、114、025，用減號串起來，",
+        "第三個引數填負一，結果是什麼呢？",
+        "答案是零二五，從最後一個減號切！"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": [
+        "取分隔符號後的文字",
+        "第三引數指定第幾個",
+        "負一從最後一個切",
+        "第六引數處理找不到"
+      ],
+      "say": [
+        "重點回顧一下。",
+        "TEXTAFTER 取出分隔符號後面的文字。",
+        "第三個引數填負一，就從最後一個切。",
+        "學會 TEXTAFTER，拆文字超輕鬆！"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "id": "VLOOKUP",
+  "name": "VLOOKUP",
+  "zh": "垂直查表函數",
+  "en": "Vertical lookup",
+  "category": "lookup",
+  "level": "基礎",
+  "version": "所有版本",
+  "summary": "在表格第一欄找到鍵值，再傳回同一列指定欄的資料。",
+  "summary_en": "Find a key in the first column and return a value from a given column.",
+  "syntax": "=VLOOKUP(lookup_value, table_array, col_index_num, [range_lookup])",
+  "slides": [
+    {
+      "type": "title",
+      "title": "VLOOKUP",
+      "subtitle": "最經典的查表函數",
+      "say": [
+        "哈囉！今天要學 VLOOKUP 函數。",
+        "它是 Excel 最經典的查表函數，",
+        "所有版本都能用，",
+        "學會它，查資料再也不用慢慢找！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "VLOOKUP 能做什麼？",
+      "points": [
+        { "icon": "search", "text": "在第一欄找鍵值", "at": 1 },
+        { "icon": "arrow", "text": "往右取第幾欄資料", "at": 2 },
+        { "icon": "check", "text": "FALSE 完全比對", "at": 3 },
+        { "icon": "sort", "text": "TRUE 近似比對", "at": 4 }
+      ],
+      "say": [
+        "VLOOKUP 的重點有四個。",
+        "它一定在表格的第一欄找鍵值。",
+        "找到後，往右取第幾欄的資料。",
+        "填 FALSE，就是要一模一樣才算。",
+        "填 TRUE，就是找最接近的級距。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "VLOOKUP",
+      "args": [
+        { "name": "lookup_value", "desc": "要找的值", "at": 1 },
+        { "name": "table_array", "desc": "查詢的表格", "at": 2 },
+        { "name": "col_index_num", "desc": "傳回第幾欄", "at": 3 },
+        { "name": "range_lookup", "desc": "比對方式", "optional": true, "at": 4 }
+      ],
+      "say": [
+        "來看語法，共有四個引數。",
+        "第一個是要找的值。",
+        "第二個是整張查詢表格。",
+        "第三個是要傳回表格的第幾欄。",
+        "第四個是比對方式，建議要填。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：用學號查班級",
+      "header": ["學號", "姓名", "班級", "座號"],
+      "rows": [
+        ["S01", "王小明", "301", "5"],
+        ["S02", "林美華", "302", "12"],
+        ["S03", "陳大文", "305", "8"],
+        ["S04", "張雅婷", "301", "21"],
+        ["S05", "李志豪", "303", "3"]
+      ],
+      "formula": "=VLOOKUP(\"S03\",A2:D6,3,FALSE)",
+      "result": "305",
+      "marks": [
+        { "at": 1, "range": "A2:D6", "kind": "range", "label": "查詢表格" },
+        { "at": 2, "range": "A4", "kind": "hit", "label": "找到 S03" },
+        { "at": 3, "range": "C2:C6", "kind": "key", "label": "第 3 欄" },
+        { "at": 4, "range": "C4", "kind": "out", "label": "傳回結果" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "我們要用學號 S03 查出班級。",
+        "查詢表格是 A2 到 D6。",
+        "VLOOKUP 在第一欄找到了 S03。",
+        "班級在表格的第三欄，所以填三。",
+        "於是傳回同一列的班級：305！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：分數換等第",
+      "header": ["分數下限", "等第"],
+      "rows": [
+        ["0", "丁"],
+        ["60", "丙"],
+        ["70", "乙"],
+        ["80", "甲"],
+        ["90", "優"]
+      ],
+      "formula": "=VLOOKUP(85,A2:B6,2,TRUE)",
+      "result": "甲",
+      "marks": [
+        { "at": 1, "range": "A2:A6", "kind": "range", "label": "由小到大" },
+        { "at": 3, "range": "A5", "kind": "hit", "label": "不超過 85" },
+        { "at": 4, "range": "B5", "kind": "out", "label": "傳回等第" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這次要把 85 分換成等第。",
+        "第一欄是分數下限，由小排到大。",
+        "第四個引數填 TRUE，用近似比對。",
+        "它會找不超過 85 的最大值，80。",
+        "所以傳回 80 那一列的等第：甲！"
+      ]
+    },
+    {
+      "type": "compare",
+      "title": "FALSE vs TRUE",
+      "left": { "head": "FALSE 完全比對", "items": ["要一模一樣", "找不到傳回 #N/A", "表格不用排序", "查學號、品號"] },
+      "right": { "head": "TRUE 近似比對", "items": ["找最接近的級距", "取不超過的最大值", "第一欄要由小到大", "分數換等第"] },
+      "say": [
+        "兩種比對方式比一比。",
+        "FALSE 要一模一樣，適合查學號；",
+        "TRUE 找級距，適合分數換等第。",
+        "用 TRUE 時，第一欄一定要先排序。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        { "kind": "warn", "text": "只能往右查，不能往左", "at": 1 },
+        { "kind": "warn", "text": "省略第四引數預設 TRUE", "at": 2 },
+        { "kind": "tip", "text": "範圍用 $ 鎖定再往下拉", "at": 3 },
+        { "kind": "tip", "text": "新版可改用 XLOOKUP", "at": 4 }
+      ],
+      "say": [
+        "來看幾個小提醒。",
+        "VLOOKUP 只能往右查，不能往左查。",
+        "省略第四個引數，會變成近似比對。",
+        "往下複製公式前，記得用錢字號鎖定。",
+        "新版 Excel 也可以改用 XLOOKUP。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "要用學號精準查出姓名，VLOOKUP 第四個引數應該填什麼？",
+      "options": ["TRUE", "FALSE", "1", "不用填"],
+      "answer": 1,
+      "explain": "FALSE 代表完全比對，學號必須一模一樣才算找到。",
+      "say": [
+        "來個隨堂小測驗！",
+        "要用學號精準查出姓名，",
+        "第四個引數應該填什麼呢？",
+        "答案是 FALSE，完全比對！"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": ["第一欄找鍵值", "第三引數是第幾欄", "FALSE 精準查詢", "TRUE 查級距要排序"],
+      "say": [
+        "重點回顧一下。",
+        "VLOOKUP 在第一欄找值，往右取資料。",
+        "精準查詢填 FALSE，查級距填 TRUE。",
+        "這個經典函數，一定要學起來喔！"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "id": "EXPAND",
+  "name": "EXPAND",
+  "zh": "擴充陣列大小",
+  "en": "Expand an array",
+  "category": "array",
+  "level": "進階",
+  "version": "Microsoft 365 / Excel 2024",
+  "summary": "把表格擴充到指定的列數和欄數，多出來的格子自動補值。",
+  "summary_en": "Expand an array to the given rows and columns, padding new cells.",
+  "syntax": "=EXPAND(array, rows, [columns], [pad_with])",
+  "slides": [
+    {
+      "type": "title",
+      "title": "EXPAND",
+      "subtitle": "把表格撐大，空格自動補",
+      "say": [
+        "哈囉！今天要學 EXPAND 函數。",
+        "有時候表格需要固定大小，",
+        "例如預留幾列給之後填寫。",
+        "EXPAND 可以幫你把表格撐大！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "EXPAND 能做什麼？",
+      "points": [
+        { "icon": "grid", "text": "指定新的列數欄數", "at": 1 },
+        { "icon": "layers", "text": "原資料留在左上角", "at": 2 },
+        { "icon": "zap", "text": "多出的格子自動補值", "at": 3 },
+        { "icon": "cross", "text": "不能把表格變小", "at": 4 }
+      ],
+      "say": [
+        "EXPAND 的重點有四個。",
+        "你指定新的列數和欄數，",
+        "原本的資料會留在左上角。",
+        "多出來的格子，會自動補上值。",
+        "注意，它只能撐大，不能縮小。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "EXPAND",
+      "args": [
+        { "name": "array", "desc": "來源表格", "at": 1 },
+        { "name": "rows", "desc": "擴充後列數", "at": 2 },
+        { "name": "columns", "desc": "擴充後欄數", "optional": true, "at": 3 },
+        { "name": "pad_with", "desc": "補什麼值", "optional": true, "at": 4 }
+      ],
+      "say": [
+        "來看語法，共有四個引數。",
+        "第一個是來源表格。",
+        "第二個是擴充後總共幾列。",
+        "第三個是擴充後總共幾欄。",
+        "第四個是空格要補的值，可省略。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：預留空格給人填",
+      "header": ["品項", "數量"],
+      "rows": [
+        ["白板筆", "12"],
+        ["影印紙", "5"],
+        ["釘書機", "3"]
+      ],
+      "formula": "=EXPAND(A2:B4,4,3,\"待填\")",
+      "spill": [
+        ["白板筆", "12", "待填"],
+        ["影印紙", "5", "待填"],
+        ["釘書機", "3", "待填"],
+        ["待填", "待填", "待填"]
+      ],
+      "marks": [
+        { "at": 1, "range": "A2:B4", "kind": "range", "label": "三列兩欄" },
+        { "at": 3, "range": "A2:B4", "kind": "hit", "label": "原資料不動" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這是辦公室的文具申請單。",
+        "原本是 A2 到 B4，三列兩欄。",
+        "我們想擴充成四列三欄，",
+        "原本的資料會留在左上角，",
+        "多出來的格子，都補上待填！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：沒填補值會怎樣？",
+      "header": ["品項", "數量"],
+      "rows": [
+        ["白板筆", "12"],
+        ["影印紙", "5"],
+        ["釘書機", "3"]
+      ],
+      "formula": "=EXPAND(A2:B3,3,3)",
+      "spill": [
+        ["白板筆", "12", "#N/A"],
+        ["影印紙", "5", "#N/A"],
+        ["#N/A", "#N/A", "#N/A"]
+      ],
+      "marks": [
+        { "at": 1, "range": "A2:B3", "kind": "range", "label": "兩列兩欄" },
+        { "at": 3, "range": "A2:B3", "kind": "warn", "label": "沒有補值" }
+      ],
+      "showResultAt": 3,
+      "say": [
+        "這次只拿前兩列，A2 到 B3。",
+        "兩列兩欄，要擴充成三列三欄。",
+        "但是我們沒有填第四個引數。",
+        "多出來的格子，全部變成 #N/A。",
+        "所以記得要填補值喔！"
+      ]
+    },
+    {
+      "type": "flow",
+      "title": "EXPAND 的運作流程",
+      "nodes": [
+        { "label": "拿到表格", "sub": "array", "at": 1 },
+        { "label": "設定大小", "sub": "rows、columns", "at": 2 },
+        { "label": "放左上角", "sub": "原資料不變", "at": 3 },
+        { "label": "補滿空格", "sub": "pad_with", "at": 4 }
+      ],
+      "say": [
+        "我們把流程整理一下。",
+        "先拿到來源表格，",
+        "再設定擴充後的列數和欄數，",
+        "原資料放在左上角，保持不變，",
+        "最後把多出的格子補滿。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        { "kind": "warn", "text": "列數比原本小會 #VALUE!", "at": 1 },
+        { "kind": "tip", "text": "欄數省略就維持原欄數", "at": 2 },
+        { "kind": "tip", "text": "補值填 \"\" 會顯示空白", "at": 3 },
+        { "kind": "tip", "text": "可讓 VSTACK 寬度一致", "at": 4 }
+      ],
+      "say": [
+        "來看幾個小提醒。",
+        "指定的大小比原本小，會出現錯誤。",
+        "欄數省略的話，就維持原本的欄數。",
+        "補值填空字串，看起來就是空白。",
+        "它也能先把表格補齊，再拿去合併。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "EXPAND 沒有填 pad_with 時，多出來的格子會顯示什麼？",
+      "options": ["0", "空白", "#N/A", "#VALUE!"],
+      "answer": 2,
+      "explain": "沒有指定補值時，新增的格子預設是 #N/A。",
+      "say": [
+        "來個隨堂小測驗！",
+        "EXPAND 沒有填補值的時候，",
+        "多出來的格子會顯示什麼呢？",
+        "答案是 #N/A！"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": ["指定新的列數欄數", "原資料留在左上角", "第四引數補空格", "只能撐大不能縮小"],
+      "say": [
+        "重點回顧一下。",
+        "EXPAND 把表格擴充成指定大小，",
+        "原資料留在左上角，空格用補值。",
+        "要預留空間時，就用 EXPAND 吧！"
+      ]
+    }
+  ]
+}

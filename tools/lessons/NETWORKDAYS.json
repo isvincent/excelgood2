@@ -1,0 +1,168 @@
+{
+  "id": "NETWORKDAYS",
+  "name": "NETWORKDAYS",
+  "zh": "計算工作天數",
+  "en": "Count workdays",
+  "category": "date",
+  "level": "基礎",
+  "version": "所有版本",
+  "summary": "計算兩個日期之間的工作天數，自動扣掉週末和假日。",
+  "summary_en": "Count the working days between two dates, skipping weekends and holidays.",
+  "syntax": "=NETWORKDAYS(start_date, end_date, [holidays])",
+  "slides": [
+    {
+      "type": "title",
+      "title": "NETWORKDAYS",
+      "subtitle": "扣掉週末，算出上班天數",
+      "say": [
+        "哈囉！今天要學的是 NETWORKDAYS 函數。",
+        "它能算出兩個日期之間有幾個工作天，",
+        "自動跳過星期六和星期日，",
+        "排專案進度、算上課天數都很方便！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "NETWORKDAYS 能做什麼？",
+      "points": [
+        { "icon": "calendar", "text": "計算兩日期間天數", "at": 1 },
+        { "icon": "cross", "text": "自動扣掉週六週日", "at": 2 },
+        { "icon": "star", "text": "可再扣掉國定假日", "at": 3 },
+        { "icon": "check", "text": "頭尾兩天都算進去", "at": 4 }
+      ],
+      "say": [
+        "NETWORKDAYS 的重點有四個。",
+        "第一，計算開始到結束日期的天數。",
+        "第二，會自動扣掉星期六、星期日。",
+        "第三，還可以再扣掉國定假日。",
+        "第四，開始和結束當天都會算進去。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "NETWORKDAYS",
+      "args": [
+        { "name": "start_date", "desc": "開始日期", "at": 1 },
+        { "name": "end_date", "desc": "結束日期", "at": 2 },
+        { "name": "holidays", "desc": "假日清單", "optional": true, "at": 3 }
+      ],
+      "say": [
+        "來看語法，共有三個引數。",
+        "第一個是開始日期。",
+        "第二個是結束日期。",
+        "第三個是假日清單，可以省略。",
+        "假日清單通常放在另一個範圍裡。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：2026 年十月的工作",
+      "header": ["工作項目", "開始日", "結束日"],
+      "rows": [
+        ["籌備會議", "10/1週四", "10/7週三"],
+        ["場地布置", "10/5週一", "10/16週五"],
+        ["成果發表", "10/19週一", "10/30週五"]
+      ],
+      "formula": "=NETWORKDAYS(B3,C3)",
+      "result": "10",
+      "marks": [
+        { "at": 1, "range": "B3", "kind": "range", "label": "開始日" },
+        { "at": 1, "range": "C3", "kind": "key", "label": "結束日" },
+        { "at": 2, "range": "B3:C3", "kind": "hit", "label": "共兩週" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這是 2026 年十月的活動工作表。",
+        "場地布置從十月五日做到十月十六日。",
+        "這段期間剛好是兩個完整的星期，",
+        "每週五個工作天，週末都扣掉，",
+        "所以 NETWORKDAYS 傳回 10 天！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：扣掉假日",
+      "header": ["說明", "日期"],
+      "rows": [
+        ["開始日", "10/1週四"],
+        ["結束日", "10/30週五"],
+        ["國慶補假", "10/9週五"],
+        ["校慶補假", "10/26週一"]
+      ],
+      "formula": "=NETWORKDAYS(B2,B3,B4:B5)",
+      "result": "20",
+      "marks": [
+        { "at": 1, "range": "B2:B3", "kind": "range", "label": "起訖日期" },
+        { "at": 2, "range": "B4:B5", "kind": "warn", "label": "假日清單" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這次要算整個十月份的上班天數。",
+        "從十月一日到十月三十日，有 22 個平日。",
+        "但其中有國慶補假和校慶補假，",
+        "把 B4 到 B5 放進第三個引數，",
+        "扣掉兩天，結果是 20 個工作天！"
+      ]
+    },
+    {
+      "type": "flow",
+      "title": "NETWORKDAYS 的運作流程",
+      "nodes": [
+        { "label": "列出日期", "sub": "開始到結束", "at": 1 },
+        { "label": "去掉週末", "sub": "週六、週日", "at": 2 },
+        { "label": "去掉假日", "sub": "holidays", "at": 3 },
+        { "label": "數剩下的", "sub": "就是工作天", "at": 4 }
+      ],
+      "say": [
+        "我們把流程整理一下。",
+        "先列出開始到結束的每一天，",
+        "把星期六、星期日拿掉，",
+        "再拿掉假日清單裡的日子，",
+        "剩下的天數，就是工作天！"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        { "kind": "tip", "text": "開始與結束日都會計入", "at": 1 },
+        { "kind": "warn", "text": "日期要是真的日期格式", "at": 2 },
+        { "kind": "tip", "text": "特殊週休改用 .INTL 版", "at": 3 },
+        { "kind": "warn", "text": "週末的假日不會重複扣", "at": 4 }
+      ],
+      "say": [
+        "最後是幾個小提醒。",
+        "開始日和結束日當天都會被算進去。",
+        "儲存格要是真正的日期，不能是文字。",
+        "週休不是六日，改用 .INTL 版本。",
+        "假日剛好在週末，也不會被重複扣掉。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "10/5週一到 10/9週五，沒有假日，工作天是？",
+      "options": ["4", "5", "7", "3"],
+      "answer": 1,
+      "explain": "星期一到星期五，頭尾都算，一共 5 個工作天。",
+      "say": [
+        "來個隨堂小測驗！",
+        "從十月五日星期一，到九日星期五，",
+        "NETWORKDAYS 會算出幾天呢？",
+        "答案是 5 天，頭尾兩天都要算！"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": ["開始日、結束日、假日", "自動扣掉週六週日", "頭尾兩天都計入", "假日清單放在範圍"],
+      "say": [
+        "重點回顧一下。",
+        "NETWORKDAYS 會自動扣掉週末，",
+        "再加上假日清單，就能算出工作天。",
+        "學會它，排行程、算進度更精準！"
+      ]
+    }
+  ]
+}

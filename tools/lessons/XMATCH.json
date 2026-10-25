@@ -1,0 +1,329 @@
+{
+  "id": "XMATCH",
+  "name": "XMATCH",
+  "zh": "找出位置函數",
+  "en": "Find the position",
+  "category": "lookup",
+  "level": "進階",
+  "version": "Microsoft 365 / Excel 2021",
+  "summary": "找出某個值在範圍中排第幾個，是 MATCH 的升級版。",
+  "summary_en": "Return the relative position of a value in a range; an upgraded MATCH.",
+  "syntax": "=XMATCH(lookup_value, lookup_array, [match_mode], [search_mode])",
+  "slides": [
+    {
+      "type": "title",
+      "title": "XMATCH",
+      "subtitle": "告訴你它排在第幾個",
+      "say": [
+        "哈囉！今天要學的是 XMATCH 函數。",
+        "它不傳回資料本身，而是傳回位置，",
+        "告訴你要找的值排在第幾個。",
+        "它是 MATCH 的升級版，更好用喔！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "XMATCH 能做什麼？",
+      "points": [
+        {
+          "icon": "search",
+          "text": "找出值的所在位置",
+          "at": 1
+        },
+        {
+          "icon": "check",
+          "text": "預設就是完全比對",
+          "at": 2
+        },
+        {
+          "icon": "sort",
+          "text": "可找較小或較大近似值",
+          "at": 3
+        },
+        {
+          "icon": "link",
+          "text": "搭配 INDEX 取出資料",
+          "at": 4
+        }
+      ],
+      "say": [
+        "XMATCH 有四個重點。",
+        "第一，它會傳回值在範圍中的位置。",
+        "第二，預設就是完全比對，不怕出錯。",
+        "第三，也能找較小或較大的近似值。",
+        "第四，搭配 INDEX 就能取出對應資料。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "XMATCH",
+      "args": [
+        {
+          "name": "lookup_value",
+          "desc": "要找的值",
+          "at": 1
+        },
+        {
+          "name": "lookup_array",
+          "desc": "在哪裡找",
+          "at": 2
+        },
+        {
+          "name": "match_mode",
+          "desc": "比對方式",
+          "optional": true,
+          "at": 3
+        },
+        {
+          "name": "search_mode",
+          "desc": "搜尋方向",
+          "optional": true,
+          "at": 4
+        }
+      ],
+      "say": [
+        "來看語法，共有四個引數。",
+        "第一個是要找的值。",
+        "第二個是查找範圍，在哪一欄找。",
+        "第三個是比對方式，零是完全比對。",
+        "第四個是搜尋方向，負一從最後找。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：筆記本排第幾？",
+      "header": [
+        "商品",
+        "單價"
+      ],
+      "rows": [
+        [
+          "鉛筆",
+          "15"
+        ],
+        [
+          "橡皮擦",
+          "20"
+        ],
+        [
+          "直尺",
+          "25"
+        ],
+        [
+          "筆記本",
+          "45"
+        ],
+        [
+          "便利貼",
+          "30"
+        ]
+      ],
+      "formula": "=XMATCH(\"筆記本\",A2:A6)",
+      "result": "4",
+      "marks": [
+        {
+          "at": 1,
+          "range": "A2:A6",
+          "kind": "range",
+          "label": "查找範圍"
+        },
+        {
+          "at": 2,
+          "range": "A5",
+          "kind": "hit",
+          "label": "第 4 個"
+        }
+      ],
+      "showResultAt": 3,
+      "say": [
+        "我們想知道筆記本排在第幾個。",
+        "查找範圍是 A2 到 A6 的商品名稱。",
+        "從鉛筆開始數，筆記本在第四個。",
+        "所以 XMATCH 傳回數字四！",
+        "注意，是範圍內的第四個，不是第四列。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：找較小的近似值",
+      "header": [
+        "分數下限",
+        "等第"
+      ],
+      "rows": [
+        [
+          "0",
+          "丁"
+        ],
+        [
+          "60",
+          "丙"
+        ],
+        [
+          "70",
+          "乙"
+        ],
+        [
+          "80",
+          "甲"
+        ],
+        [
+          "90",
+          "優"
+        ]
+      ],
+      "formula": "=XMATCH(78,A2:A6,-1)",
+      "result": "3",
+      "marks": [
+        {
+          "at": 1,
+          "range": "A2:A6",
+          "kind": "range",
+          "label": "分數下限"
+        },
+        {
+          "at": 3,
+          "range": "A4",
+          "kind": "hit",
+          "label": "70 最接近"
+        }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "七十八分要對應到哪個等第呢？",
+        "範圍是 A2 到 A6 的分數下限。",
+        "表裡沒有七十八，所以第三個引數填負一，",
+        "找不到時就找較小的值，也就是七十。",
+        "七十是第三個，所以傳回三！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例三：搭配 INDEX 取等第",
+      "header": [
+        "分數下限",
+        "等第"
+      ],
+      "rows": [
+        [
+          "0",
+          "丁"
+        ],
+        [
+          "60",
+          "丙"
+        ],
+        [
+          "70",
+          "乙"
+        ],
+        [
+          "80",
+          "甲"
+        ],
+        [
+          "90",
+          "優"
+        ]
+      ],
+      "formula": "=INDEX(B2:B6,XMATCH(78,A2:A6,-1))",
+      "result": "乙",
+      "marks": [
+        {
+          "at": 1,
+          "range": "A4",
+          "kind": "hit",
+          "label": "位置 3"
+        },
+        {
+          "at": 2,
+          "range": "B2:B6",
+          "kind": "key",
+          "label": "INDEX 範圍"
+        },
+        {
+          "at": 3,
+          "range": "B4",
+          "kind": "out",
+          "label": "傳回結果"
+        }
+      ],
+      "showResultAt": 3,
+      "say": [
+        "位置找到了，怎麼拿到等第呢？",
+        "剛剛 XMATCH 算出位置是三。",
+        "把它放進 INDEX，到 B2 到 B6 去取，",
+        "第三個就是乙，七十八分是乙等！"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        {
+          "kind": "tip",
+          "text": "match_mode 1 找較大值",
+          "at": 1
+        },
+        {
+          "kind": "tip",
+          "text": "match_mode 2 可用萬用字元",
+          "at": 2
+        },
+        {
+          "kind": "tip",
+          "text": "search_mode -1 從最後找",
+          "at": 3
+        },
+        {
+          "kind": "warn",
+          "text": "找不到會傳回 #N/A",
+          "at": 4
+        }
+      ],
+      "say": [
+        "最後是幾個小提醒。",
+        "比對方式填一，會找較大的近似值。",
+        "填二，就可以用星號這類萬用字元。",
+        "搜尋方向填負一，會從最後一筆往上找。",
+        "如果完全找不到，會出現 N/A 錯誤。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "A2:A4 依序是鉛筆、橡皮擦、直尺，XMATCH 找「直尺」傳回什麼？",
+      "options": [
+        "直尺",
+        "3",
+        "4",
+        "A4"
+      ],
+      "answer": 1,
+      "explain": "XMATCH 傳回位置，直尺是範圍中的第三個，所以是 3。",
+      "say": [
+        "來個隨堂小測驗！",
+        "範圍裡依序是鉛筆、橡皮擦、直尺，",
+        "XMATCH 找直尺會傳回什麼呢？",
+        "答案是三，因為它傳回的是位置！"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": [
+        "傳回位置不傳回資料",
+        "預設完全比對",
+        "負一找較小近似值",
+        "搭配 INDEX 取資料"
+      ],
+      "say": [
+        "重點回顧一下。",
+        "XMATCH 傳回的是位置，不是資料。",
+        "預設完全比對，負一可找較小近似值。",
+        "搭配 INDEX，查表又快又準！"
+      ]
+    }
+  ]
+}

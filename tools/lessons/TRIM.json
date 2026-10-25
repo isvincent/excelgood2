@@ -1,0 +1,175 @@
+{
+  "id": "TRIM",
+  "name": "TRIM",
+  "zh": "清除多餘空白",
+  "en": "Remove extra spaces",
+  "category": "text",
+  "level": "基礎",
+  "version": "所有版本",
+  "summary": "刪除文字前後的空白，並把中間連續空白縮成一個。",
+  "summary_en": "Remove leading and trailing spaces and collapse inner spaces to one.",
+  "syntax": "=TRIM(text)",
+  "slides": [
+    {
+      "type": "title",
+      "title": "TRIM",
+      "subtitle": "一鍵清掉多餘空白",
+      "say": [
+        "哈囉！今天要學的是 TRIM 函數。",
+        "從表單或網頁複製來的資料，",
+        "常常藏著看不見的多餘空白，",
+        "TRIM 可以幫你一次清乾淨！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "TRIM 能做什麼？",
+      "points": [
+        { "icon": "cut", "text": "刪掉頭尾的空白", "at": 1 },
+        { "icon": "merge", "text": "中間連續空白留一個", "at": 2 },
+        { "icon": "check", "text": "讓查找比對更準確", "at": 3 },
+        { "icon": "text", "text": "只處理半形空白", "at": 4 }
+      ],
+      "say": [
+        "TRIM 的重點有四個。",
+        "第一，文字前面和後面的空白全部刪掉。",
+        "第二，中間連續的空白，只留下一個。",
+        "第三，清完空白，查找比對才不會失敗。",
+        "第四，它只處理一般的半形空白。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "TRIM",
+      "args": [
+        { "name": "text", "desc": "要清理的文字", "at": 1 }
+      ],
+      "say": [
+        "TRIM 的語法超簡單，",
+        "只有一個引數，就是要清理的文字，",
+        "可以直接放儲存格，例如 A2。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：清掉姓名前後空白",
+      "header": ["報名名單"],
+      "rows": [
+        ["  王小明"],
+        ["林美華   "],
+        ["  陳大文  "],
+        ["張雅婷"]
+      ],
+      "formula": "=TRIM(A4)",
+      "result": "陳大文",
+      "marks": [
+        { "at": 1, "range": "A2:A5", "kind": "range", "label": "報名資料" },
+        { "at": 2, "range": "A4", "kind": "warn", "label": "前後有空白" },
+        { "at": 4, "range": "A4", "kind": "out", "label": "清理完成" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這是從線上表單匯出的報名名單。",
+        "有些姓名前後多打了空白鍵。",
+        "像 A4 的陳大文，前後各有兩個空白，",
+        "直接拿去查找，會找不到人。",
+        "用 TRIM 清理後，變成乾淨的陳大文！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：中間空白縮成一個",
+      "header": ["課程名稱"],
+      "rows": [
+        ["  Excel    基礎班  "],
+        ["Word 進階班"],
+        ["  簡報   設計班"]
+      ],
+      "formula": "=TRIM(A2)",
+      "result": "Excel 基礎班",
+      "marks": [
+        { "at": 1, "range": "A2", "kind": "warn", "label": "空白亂七八糟" },
+        { "at": 3, "range": "A2", "kind": "out", "label": "只留一個" }
+      ],
+      "showResultAt": 3,
+      "say": [
+        "再看這份研習課程名稱。",
+        "A2 前後有空白，中間還有四個空白。",
+        "TRIM 會刪掉頭尾的空白，",
+        "中間只留一個，變成 Excel 空白基礎班！"
+      ]
+    },
+    {
+      "type": "build",
+      "title": "組合技：算出多了幾個空白",
+      "parts": [
+        { "text": "=LEN(A2)", "note": "原本的字數", "at": 1 },
+        { "text": "-", "note": "減掉", "at": 2 },
+        { "text": "LEN(TRIM(A2))", "note": "清理後的字數", "at": 3 }
+      ],
+      "result": "7",
+      "say": [
+        "想知道 A2 多了幾個空白嗎？",
+        "先用 LEN 算出原本有十六個字，",
+        "減掉，",
+        "清理後的字數，也就是九個字，",
+        "答案是七，總共多了七個空白！"
+      ]
+    },
+    {
+      "type": "compare",
+      "title": "TRIM vs SUBSTITUTE",
+      "left": { "head": "TRIM(A2)", "items": ["刪掉頭尾空白", "中間保留一個", "適合英文與姓名"] },
+      "right": { "head": "SUBSTITUTE", "items": ["把空白換成空字串", "全部空白都刪光", "適合電話、編號"] },
+      "say": [
+        "TRIM 和 SUBSTITUTE 比一比。",
+        "TRIM 會保留中間一個空白，",
+        "SUBSTITUTE 可以把空白全部刪光。",
+        "句子用 TRIM，編號就用 SUBSTITUTE。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        { "kind": "tip", "text": "中間的空白會留一個", "at": 1 },
+        { "kind": "warn", "text": "全形空白不會被清掉", "at": 2 },
+        { "kind": "warn", "text": "網頁的不換行空白也不會", "at": 3 },
+        { "kind": "tip", "text": "清完可貼上為值取代原資料", "at": 4 }
+      ],
+      "say": [
+        "最後是幾個小提醒。",
+        "TRIM 不會把中間的空白全刪光。",
+        "中文輸入法打出的全形空白，它清不掉。",
+        "網頁複製來的特殊空白，也要另外處理。",
+        "清完後，可以貼上為值，取代原資料。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "=TRIM(\"  Hello    World  \") 的結果是？",
+      "options": ["HelloWorld", "Hello World", " Hello World", "Hello    World"],
+      "answer": 1,
+      "explain": "頭尾空白刪掉，中間連續空白只留一個。",
+      "say": [
+        "來個隨堂小測驗！",
+        "Hello 和 World 前後中間都有空白，",
+        "TRIM 之後會變成什麼呢？",
+        "答案是中間只留一個空白的 Hello World！"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": ["刪掉頭尾空白", "中間空白留一個", "全形空白清不掉", "比對前先 TRIM"],
+      "say": [
+        "重點回顧一下。",
+        "TRIM 刪掉頭尾空白，中間只留一個。",
+        "全形空白要另外用 SUBSTITUTE 處理。",
+        "資料比對前先 TRIM，錯誤少一半！"
+      ]
+    }
+  ]
+}

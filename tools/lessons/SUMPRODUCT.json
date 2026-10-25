@@ -1,0 +1,172 @@
+{
+  "id": "SUMPRODUCT",
+  "name": "SUMPRODUCT",
+  "zh": "乘積加總函數",
+  "en": "Sum of products",
+  "category": "math",
+  "level": "進階",
+  "version": "所有版本",
+  "summary": "把幾組數字逐列相乘，再把所有乘積加總起來。",
+  "summary_en": "Multiply corresponding values in arrays and return the sum of the products.",
+  "syntax": "=SUMPRODUCT(array1, [array2], [array3], ...)",
+  "slides": [
+    {
+      "type": "title",
+      "title": "SUMPRODUCT",
+      "subtitle": "先相乘、再加總，一步到位",
+      "say": [
+        "哈囉！今天要學 SUMPRODUCT 函數。",
+        "算採購總金額時，",
+        "通常要先算每一項的小計，再加總。",
+        "SUMPRODUCT 一個公式就完成！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "SUMPRODUCT 能做什麼？",
+      "points": [
+        { "icon": "calc", "text": "同一列的數字相乘", "at": 1 },
+        { "icon": "layers", "text": "所有乘積再加總", "at": 2 },
+        { "icon": "grid", "text": "不用額外小計欄", "at": 3 },
+        { "icon": "filter", "text": "可加條件做統計", "at": 4 }
+      ],
+      "say": [
+        "SUMPRODUCT 的重點有四個。",
+        "它先把同一列的數字相乘，",
+        "再把所有的乘積加起來。",
+        "所以不需要多做一欄小計。",
+        "還可以加上條件，做分類統計。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "SUMPRODUCT",
+      "args": [
+        { "name": "array1", "desc": "第一組數字", "at": 1 },
+        { "name": "array2", "desc": "第二組數字", "optional": true, "at": 2 },
+        { "name": "array3", "desc": "更多組數字", "optional": true, "at": 3 }
+      ],
+      "say": [
+        "來看語法。",
+        "第一個引數是第一組數字。",
+        "第二個是要對應相乘的第二組數字。",
+        "後面還可以再加更多組。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：採購總金額",
+      "header": ["品項", "單價", "數量"],
+      "rows": [
+        ["白板筆", "25", "12"],
+        ["影印紙", "120", "5"],
+        ["資料夾", "15", "20"],
+        ["膠帶", "30", "4"]
+      ],
+      "formula": "=SUMPRODUCT(B2:B5,C2:C5)",
+      "result": "1320",
+      "marks": [
+        { "at": 1, "range": "B2:B5", "kind": "range", "label": "單價" },
+        { "at": 1, "range": "C2:C5", "kind": "key", "label": "數量" },
+        { "at": 2, "range": "B2:C2", "kind": "hit", "label": "25 乘 12" },
+        { "at": 3, "range": "B3:C3", "kind": "hit", "label": "120 乘 5" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這是學校的文具採購單。",
+        "單價在 B 欄，數量在 C 欄。",
+        "白板筆 25 乘 12，等於 300。",
+        "影印紙 120 乘 5，等於 600。",
+        "四項全部加起來，總金額是 1320！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：只算教務處",
+      "header": ["處室", "單價", "數量"],
+      "rows": [
+        ["教務處", "25", "10"],
+        ["學務處", "120", "3"],
+        ["教務處", "30", "5"],
+        ["總務處", "15", "8"],
+        ["教務處", "120", "2"]
+      ],
+      "formula": "=SUMPRODUCT((A2:A6=\"教務處\")*B2:B6*C2:C6)",
+      "result": "640",
+      "marks": [
+        { "at": 1, "range": "A2:A6", "kind": "range", "label": "比對處室" },
+        { "at": 2, "range": "A2", "kind": "hit", "label": "是 → 1" },
+        { "at": 2, "range": "A3", "kind": "warn", "label": "不是 → 0" },
+        { "at": 3, "range": "B2:C6", "kind": "key", "label": "單價乘數量" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這次只想算教務處的採購金額。",
+        "先比對 A 欄是不是教務處，",
+        "是的話得到一，不是的話得到零。",
+        "再乘上單價和數量，零乘什麼都是零。",
+        "250 加 150 加 240，共 640！"
+      ]
+    },
+    {
+      "type": "flow",
+      "title": "SUMPRODUCT 的運作流程",
+      "nodes": [
+        { "label": "對齊各列", "sub": "範圍大小相同", "at": 1 },
+        { "label": "逐列相乘", "sub": "算出每列乘積", "at": 2 },
+        { "label": "條件過濾", "sub": "不符的變 0", "at": 3 },
+        { "label": "全部加總", "sub": "得到結果", "at": 4 }
+      ],
+      "say": [
+        "我們把流程整理一下。",
+        "先把每組範圍一列一列對齊，",
+        "接著逐列相乘，算出每列的乘積。",
+        "有條件的話，不符合的列會變成零。",
+        "最後把所有乘積加總，就是答案。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        { "kind": "warn", "text": "各範圍大小要相同", "at": 1 },
+        { "kind": "tip", "text": "條件要用括號包起來", "at": 2 },
+        { "kind": "tip", "text": "多個條件用 * 串接", "at": 3 },
+        { "kind": "tip", "text": "不用按 Ctrl+Shift+Enter", "at": 4 }
+      ],
+      "say": [
+        "來看幾個小提醒。",
+        "每個範圍的大小必須相同，否則會出錯。",
+        "條件判斷要用括號包起來。",
+        "有好幾個條件時，用乘號串起來。",
+        "它本身就能處理陣列，直接按 Enter。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "SUMPRODUCT({2,3},{4,5}) 的結果是多少？",
+      "options": ["14", "20", "23", "120"],
+      "answer": 2,
+      "explain": "2 乘 4 等於 8，3 乘 5 等於 15，加總是 23。",
+      "say": [
+        "來個隨堂小測驗！",
+        "二、三和四、五兩組數字，",
+        "SUMPRODUCT 的結果是多少呢？",
+        "答案是 23！八加十五等於 23。"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": ["逐列相乘再加總", "不用額外小計欄", "條件用括號相乘", "範圍大小要相同"],
+      "say": [
+        "重點回顧一下。",
+        "SUMPRODUCT 先逐列相乘，再全部加總。",
+        "加上條件，還能做分類統計。",
+        "算總金額，一個公式就搞定！"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,160 @@
+{
+  "id": "CONCATENATE",
+  "name": "CONCATENATE",
+  "zh": "文字串接函數",
+  "en": "Join text",
+  "category": "text",
+  "level": "基礎",
+  "version": "所有版本",
+  "summary": "把多段文字或儲存格內容，依序接成一段文字。",
+  "summary_en": "Join several text items or cells into one string.",
+  "syntax": "=CONCATENATE(text1, [text2], ...)",
+  "slides": [
+    {
+      "type": "title",
+      "title": "CONCATENATE",
+      "subtitle": "把文字一段一段接起來",
+      "say": [
+        "哈囉！今天要學的是 CONCATENATE 函數。",
+        "它的工作很單純，就是把文字接起來。",
+        "姓和名合併、加上班級，",
+        "做名牌、做名單都用得到！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "CONCATENATE 能做什麼？",
+      "points": [
+        { "icon": "merge", "text": "把多段文字合成一段", "at": 1 },
+        { "icon": "table", "text": "可以接儲存格內容", "at": 2 },
+        { "icon": "text", "text": "可以夾自訂文字", "at": 3 },
+        { "icon": "list", "text": "依引數順序串接", "at": 4 }
+      ],
+      "say": [
+        "CONCATENATE 的重點有四個。",
+        "第一，它把好幾段文字合成一段。",
+        "第二，可以直接接儲存格的內容。",
+        "第三，中間可以夾入自己打的文字。",
+        "第四，它會照引數的順序，一個個接上。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "CONCATENATE",
+      "args": [
+        { "name": "text1", "desc": "第一段文字", "at": 1 },
+        { "name": "text2", "desc": "第二段文字", "optional": true, "at": 2 },
+        { "name": "...", "desc": "更多文字", "optional": true, "at": 3 }
+      ],
+      "say": [
+        "來看語法，引數就是一段段文字。",
+        "第一個 text1，是最前面的文字。",
+        "第二個 text2，接在後面。",
+        "後面還能一直加，最多兩百五十五段。",
+        "自己打的文字，要用雙引號包起來。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：姓 + 名",
+      "header": ["姓", "名", "班級"],
+      "rows": [
+        ["王", "小明", "101"],
+        ["林", "美華", "102"],
+        ["陳", "大文", "101"]
+      ],
+      "formula": "=CONCATENATE(A2,B2)",
+      "result": "王小明",
+      "marks": [
+        { "at": 1, "range": "A2", "kind": "range", "label": "第一段" },
+        { "at": 2, "range": "B2", "kind": "key", "label": "第二段" }
+      ],
+      "showResultAt": 3,
+      "say": [
+        "姓和名分開放，想合成完整姓名。",
+        "第一段是 A2 的「王」，",
+        "第二段是 B2 的「小明」，",
+        "接起來就是：王小明！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：加入自訂文字",
+      "header": ["姓", "名", "班級"],
+      "rows": [
+        ["王", "小明", "101"],
+        ["林", "美華", "102"],
+        ["陳", "大文", "101"]
+      ],
+      "formula": "=CONCATENATE(C3,\"班\",A3,B3)",
+      "result": "102班林美華",
+      "marks": [
+        { "at": 1, "range": "C3", "kind": "range", "label": "班級" },
+        { "at": 3, "range": "A3:B3", "kind": "key", "label": "姓名" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這次要做名牌，前面加上班級。",
+        "先放 C3 的班級 102，",
+        "接著夾入自訂文字「班」，要加雙引號。",
+        "最後接上 A3 和 B3 的姓名，",
+        "結果就是：102班林美華！"
+      ]
+    },
+    {
+      "type": "compare",
+      "title": "CONCATENATE vs & 符號",
+      "left": { "head": "CONCATENATE", "items": ["用函數串接", "引數用逗號分開", "所有版本都能用", "新版改名 CONCAT"] },
+      "right": { "head": "& 符號", "items": ["用運算子串接", "=A2&B2 更簡短", "所有版本都能用", "適合少量串接"] },
+      "say": [
+        "其實用 & 符號也能串接文字。",
+        "例如 A2 & B2，效果完全一樣。",
+        "CONCATENATE 適合段落多、好閱讀；",
+        "& 符號則更簡短，兩種都可以用。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        { "kind": "tip", "text": "要空格就加 \" \"", "at": 1 },
+        { "kind": "warn", "text": "不能直接選整個範圍", "at": 2 },
+        { "kind": "tip", "text": "要加分隔符號用 TEXTJOIN", "at": 3 },
+        { "kind": "warn", "text": "日期會變成數字，用 TEXT", "at": 4 }
+      ],
+      "say": [
+        "最後是幾個小提醒。",
+        "想在中間加空格，就放一個雙引號空格。",
+        "它不能直接選 A2 到 A6 一整個範圍。",
+        "要用逗號或頓號分隔，可改用 TEXTJOIN。",
+        "接日期會變成數字，要先用 TEXT 轉換。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "A2 是陳、B2 是大文，=CONCATENATE(B2,A2) 是？",
+      "options": ["陳大文", "大文陳", "陳 大文", "#VALUE!"],
+      "answer": 1,
+      "explain": "CONCATENATE 依引數順序串接，B2 在前，所以是大文陳。",
+      "say": [
+        "來個隨堂小測驗！",
+        "如果把 B2 放前面、A2 放後面，",
+        "結果會是什麼呢？",
+        "答案是「大文陳」，順序很重要喔！"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": ["依序串接多段文字", "自訂文字加雙引號", "& 符號效果一樣", "分隔串接用 TEXTJOIN"],
+      "say": [
+        "重點回顧一下。",
+        "CONCATENATE 會照順序把文字接起來，",
+        "自訂文字記得加雙引號。",
+        "學會串接，做名牌名單快又整齊！"
+      ]
+    }
+  ]
+}

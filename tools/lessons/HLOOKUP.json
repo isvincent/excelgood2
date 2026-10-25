@@ -1,0 +1,164 @@
+{
+  "id": "HLOOKUP",
+  "name": "HLOOKUP",
+  "zh": "水平查找函數",
+  "en": "Horizontal lookup",
+  "category": "lookup",
+  "level": "基礎",
+  "version": "所有版本",
+  "summary": "在表格第一列找到鍵值，再往下取出指定列的資料。",
+  "summary_en": "Find a key in the top row and return a value from a row below it.",
+  "syntax": "=HLOOKUP(lookup_value, table_array, row_index_num, [range_lookup])",
+  "slides": [
+    {
+      "type": "title",
+      "title": "HLOOKUP",
+      "subtitle": "橫著找，往下拿",
+      "say": [
+        "哈囉！今天要學的是 HLOOKUP 函數。",
+        "H 代表水平，也就是橫向查找。",
+        "當表格的標題是橫著排的，",
+        "就輪到 HLOOKUP 上場了！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "HLOOKUP 能做什麼？",
+      "points": [
+        { "icon": "search", "text": "在第一列找鍵值", "at": 1 },
+        { "icon": "arrow", "text": "往下取第幾列資料", "at": 2 },
+        { "icon": "check", "text": "FALSE 完全比對", "at": 3 },
+        { "icon": "sort", "text": "TRUE 找區間級距", "at": 4 }
+      ],
+      "say": [
+        "HLOOKUP 的重點有四個。",
+        "第一，它只在表格的第一列找鍵值。",
+        "第二，找到後往下取出第幾列的資料。",
+        "第三，最後填 FALSE，是完全比對。",
+        "第四，填 TRUE 可以找區間級距。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "HLOOKUP",
+      "args": [
+        { "name": "lookup_value", "desc": "要找的值", "at": 1 },
+        { "name": "table_array", "desc": "整個表格範圍", "at": 2 },
+        { "name": "row_index_num", "desc": "傳回第幾列", "at": 3 },
+        { "name": "range_lookup", "desc": "比對方式", "optional": true, "at": 4 }
+      ],
+      "say": [
+        "來看語法，共有四個引數。",
+        "第一個是要找的值。",
+        "第二個是整個表格，第一列要放鍵值。",
+        "第三個是要傳回表格的第幾列。",
+        "第四個是比對方式，省略會是近似比對。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：查數學成績",
+      "header": ["科目", "國文", "英文", "數學", "自然"],
+      "rows": [
+        ["王小明", "88", "92", "75", "81"],
+        ["林美華", "90", "85", "96", "78"],
+        ["陳大文", "76", "80", "84", "93"]
+      ],
+      "formula": "=HLOOKUP(\"數學\",B1:E4,3,FALSE)",
+      "result": "96",
+      "marks": [
+        { "at": 1, "range": "B1:E1", "kind": "range", "label": "第一列找" },
+        { "at": 2, "range": "D1", "kind": "hit", "label": "找到數學" },
+        { "at": 3, "range": "D1:D4", "kind": "key", "label": "往下數" },
+        { "at": 4, "range": "D3", "kind": "out", "label": "第 3 列" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "科目橫著排，我們要查數學成績。",
+        "表格範圍是 B1 到 E4，第一列是科目。",
+        "HLOOKUP 在第一列找到了數學。",
+        "從科目那列往下數，第三列是林美華，",
+        "所以傳回她的數學成績：96 分！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：近似比對找等第",
+      "header": ["分數下限", "0", "60", "75", "90"],
+      "rows": [
+        ["等第", "待加強", "及格", "良好", "優秀"]
+      ],
+      "formula": "=HLOOKUP(82,B1:E2,2,TRUE)",
+      "result": "良好",
+      "marks": [
+        { "at": 1, "range": "B1:E1", "kind": "range", "label": "由小到大" },
+        { "at": 2, "range": "E1", "kind": "warn", "label": "90 太大" },
+        { "at": 3, "range": "D1", "kind": "hit", "label": "≤82 最大" },
+        { "at": 4, "range": "D2", "kind": "out", "label": "傳回等第" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這是一張橫向的等第級距表。",
+        "第一列的分數下限，要由小到大排好。",
+        "我們找八十二分，九十已經太大了。",
+        "不超過八十二的最大值是七十五，",
+        "往下第二列，就是等第：良好！"
+      ]
+    },
+    {
+      "type": "compare",
+      "title": "HLOOKUP vs VLOOKUP",
+      "left": { "head": "VLOOKUP", "items": ["在第一欄直的找", "往右取第幾欄", "標題在上方", "資料直向排列"] },
+      "right": { "head": "HLOOKUP", "items": ["在第一列橫的找", "往下取第幾列", "標題在左側", "資料橫向排列"] },
+      "say": [
+        "和 VLOOKUP 比一比。",
+        "VLOOKUP 在第一欄直著找，往右取資料；",
+        "HLOOKUP 在第一列橫著找，往下取資料。",
+        "看表格怎麼排，選對的那一個就好。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        { "kind": "tip", "text": "列號從範圍第一列算起", "at": 1 },
+        { "kind": "warn", "text": "精確查找記得填 FALSE", "at": 2 },
+        { "kind": "warn", "text": "只能往下找，不能往上", "at": 3 },
+        { "kind": "tip", "text": "新版可改用 XLOOKUP", "at": 4 }
+      ],
+      "say": [
+        "最後是幾個小提醒。",
+        "列號是從表格範圍的第一列開始算。",
+        "要精確查找，第四個引數一定填 FALSE。",
+        "它只能往下取資料，不能往上找。",
+        "新版 Excel 可以改用更靈活的 XLOOKUP。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "範例一中 =HLOOKUP(\"英文\",B1:E4,4,FALSE) 是？",
+      "options": ["92", "85", "80", "84"],
+      "answer": 2,
+      "explain": "英文在 C 欄，往下第 4 列是陳大文，成績 80 分。",
+      "say": [
+        "來個隨堂小測驗！",
+        "在第一列找英文，傳回第四列，",
+        "結果會是多少呢？",
+        "答案是 80，陳大文的英文成績！"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": ["第一列橫向找鍵值", "往下取第幾列", "精確查找填 FALSE", "TRUE 找區間級距"],
+      "say": [
+        "重點回顧一下。",
+        "HLOOKUP 在第一列找，再往下取資料。",
+        "精確查找填 FALSE，找級距填 TRUE。",
+        "表格橫著排時，就用 HLOOKUP 吧！"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "id": "CHOOSECOLS",
+  "name": "CHOOSECOLS",
+  "zh": "挑選指定欄",
+  "en": "Pick specific columns",
+  "category": "array",
+  "level": "進階",
+  "version": "Microsoft 365 / Excel 2024",
+  "summary": "依欄號從表格挑出想要的欄，還能重新排列順序。",
+  "summary_en": "Return the specified columns from an array, in the order you list them.",
+  "syntax": "=CHOOSECOLS(array, col_num1, [col_num2], ...)",
+  "slides": [
+    {
+      "type": "title",
+      "title": "CHOOSECOLS",
+      "subtitle": "只留需要的欄，順序隨你",
+      "say": [
+        "哈囉！今天要學 CHOOSECOLS 函數。",
+        "成績表欄位很多，",
+        "但公告時只需要姓名和總分。",
+        "用 CHOOSECOLS 一秒挑出來！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "CHOOSECOLS 能做什麼？",
+      "points": [
+        { "icon": "check", "text": "依欄號挑出指定欄", "at": 1 },
+        { "icon": "filter", "text": "不要的欄自動略過", "at": 2 },
+        { "icon": "sort", "text": "可以重新排列欄位", "at": 3 },
+        { "icon": "swap", "text": "負數從最後一欄數", "at": 4 }
+      ],
+      "say": [
+        "CHOOSECOLS 的重點有四個。",
+        "它用欄號，從表格挑出指定的欄。",
+        "沒被點到的欄，就會被略過。",
+        "你寫的順序，就是新的欄位順序。",
+        "欄號用負數，會從最後一欄往回數。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "CHOOSECOLS",
+      "args": [
+        { "name": "array", "desc": "來源表格", "at": 1 },
+        { "name": "col_num1", "desc": "第一個欄號", "at": 2 },
+        { "name": "col_num2", "desc": "更多欄號", "optional": true, "at": 3 }
+      ],
+      "say": [
+        "來看語法。",
+        "第一個引數是來源表格。",
+        "第二個是要挑的第一個欄號。",
+        "後面可以繼續加欄號，想挑幾欄都行。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：只要姓名和總分",
+      "header": ["學號", "姓名", "班級", "總分"],
+      "rows": [
+        ["S01", "王小明", "301", "452"],
+        ["S02", "林美華", "302", "478"],
+        ["S03", "陳大文", "301", "436"],
+        ["S04", "張雅婷", "303", "465"]
+      ],
+      "formula": "=CHOOSECOLS(A2:D5,2,4)",
+      "spill": [
+        ["王小明", "452"],
+        ["林美華", "478"],
+        ["陳大文", "436"],
+        ["張雅婷", "465"]
+      ],
+      "marks": [
+        { "at": 1, "range": "A2:D5", "kind": "range", "label": "來源表格" },
+        { "at": 2, "range": "B2:B5", "kind": "hit", "label": "第 2 欄" },
+        { "at": 3, "range": "D2:D5", "kind": "hit", "label": "第 4 欄" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這是一張四個欄位的成績表。",
+        "來源表格是 A2 到 D5。",
+        "欄號二，是姓名欄。",
+        "欄號四，是總分欄。",
+        "學號和班級被略過，畫面清爽多了！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：用負數調換順序",
+      "header": ["學號", "姓名", "班級", "總分"],
+      "rows": [
+        ["S01", "王小明", "301", "452"],
+        ["S02", "林美華", "302", "478"],
+        ["S03", "陳大文", "301", "436"],
+        ["S04", "張雅婷", "303", "465"]
+      ],
+      "formula": "=CHOOSECOLS(A2:D5,-1,2)",
+      "spill": [
+        ["452", "王小明"],
+        ["478", "林美華"],
+        ["436", "陳大文"],
+        ["465", "張雅婷"]
+      ],
+      "marks": [
+        { "at": 1, "range": "D2:D5", "kind": "hit", "label": "負一" },
+        { "at": 2, "range": "B2:B5", "kind": "key", "label": "第 2 欄" }
+      ],
+      "showResultAt": 3,
+      "say": [
+        "這次想把總分放在最前面。",
+        "欄號負一，代表最後一欄，總分。",
+        "接著寫二，再拿姓名欄。",
+        "結果總分在左、姓名在右，",
+        "欄位順序完全照你的意思排！"
+      ]
+    },
+    {
+      "type": "compare",
+      "title": "CHOOSECOLS vs CHOOSEROWS",
+      "left": { "head": "CHOOSECOLS", "items": ["挑選欄", "數字是欄號", "負數從最後一欄", "整理欄位很方便"] },
+      "right": { "head": "CHOOSEROWS", "items": ["挑選列", "數字是列號", "負數從最後一列", "挑特定紀錄很方便"] },
+      "say": [
+        "和 CHOOSEROWS 比一比。",
+        "CHOOSECOLS 挑欄，數字是欄號；",
+        "CHOOSEROWS 挑列，數字是列號。",
+        "兩個都能用負數從後面數喔。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        { "kind": "tip", "text": "欄號是表格內第幾欄", "at": 1 },
+        { "kind": "tip", "text": "可搭配 FILTER 先篩選", "at": 2 },
+        { "kind": "warn", "text": "欄號超出範圍會 #VALUE!", "at": 3 },
+        { "kind": "warn", "text": "舊版 Excel 沒有此函數", "at": 4 }
+      ],
+      "say": [
+        "來看幾個小提醒。",
+        "欄號是表格內第幾欄，不是欄字母。",
+        "可以先用 FILTER 篩選，再挑欄位。",
+        "欄號超出表格範圍，會出現錯誤。",
+        "舊版 Excel 沒有這個函數喔。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "CHOOSECOLS(A2:D5,3,1) 結果的第一欄是原表的哪一欄？",
+      "options": ["A 欄", "B 欄", "C 欄", "D 欄"],
+      "answer": 2,
+      "explain": "欄號三寫在最前面，所以第一欄是 C 欄。",
+      "say": [
+        "來個隨堂小測驗！",
+        "CHOOSECOLS 欄號寫三、一，",
+        "結果的第一欄是原表的哪一欄？",
+        "答案是 C 欄！順序照你寫的排。"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": ["依欄號挑出指定欄", "不要的欄自動略過", "可重新排列順序", "負數從最後數"],
+      "say": [
+        "重點回顧一下。",
+        "CHOOSECOLS 用欄號挑出想要的欄，",
+        "還能重新排列，負數從後面數。",
+        "整理報表，從此輕鬆又快速！"
+      ]
+    }
+  ]
+}

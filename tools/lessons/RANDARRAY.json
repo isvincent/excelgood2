@@ -1,0 +1,332 @@
+{
+  "id": "RANDARRAY",
+  "name": "RANDARRAY",
+  "zh": "隨機亂數陣列",
+  "en": "Random number array",
+  "category": "dynamic",
+  "level": "進階",
+  "version": "Microsoft 365 / Excel 2021",
+  "summary": "一次產生指定列數、欄數與範圍的隨機數字陣列。",
+  "summary_en": "Generate an array of random numbers with set size, range, and type.",
+  "syntax": "=RANDARRAY([rows], [columns], [min], [max], [whole_number])",
+  "slides": [
+    {
+      "type": "title",
+      "title": "RANDARRAY",
+      "subtitle": "一次產生一整排亂數",
+      "say": [
+        "哈囉！今天要學的是 RANDARRAY 函數。",
+        "上課抽籤、隨機分組、出練習題，",
+        "都需要隨機的數字。",
+        "RANDARRAY 一次就能產生一整排亂數！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "RANDARRAY 能做什麼？",
+      "points": [
+        {
+          "icon": "grid",
+          "text": "指定幾列幾欄的亂數",
+          "at": 1
+        },
+        {
+          "icon": "calc",
+          "text": "可設定最小與最大值",
+          "at": 2
+        },
+        {
+          "icon": "dice",
+          "text": "可選整數或小數",
+          "at": 3
+        },
+        {
+          "icon": "zap",
+          "text": "每次重算都會改變",
+          "at": 4
+        }
+      ],
+      "say": [
+        "RANDARRAY 有四個重點。",
+        "第一，可以指定要幾列、幾欄的亂數。",
+        "第二，可以設定最小值和最大值。",
+        "第三，可以選擇要整數還是小數。",
+        "第四，每次工作表重算，數字都會改變。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "RANDARRAY",
+      "args": [
+        {
+          "name": "rows",
+          "desc": "幾列",
+          "optional": true,
+          "at": 1
+        },
+        {
+          "name": "columns",
+          "desc": "幾欄",
+          "optional": true,
+          "at": 1
+        },
+        {
+          "name": "min",
+          "desc": "最小值",
+          "optional": true,
+          "at": 2
+        },
+        {
+          "name": "max",
+          "desc": "最大值",
+          "optional": true,
+          "at": 2
+        },
+        {
+          "name": "whole_number",
+          "desc": "是否為整數",
+          "optional": true,
+          "at": 3
+        }
+      ],
+      "say": [
+        "來看語法，五個引數都可以省略。",
+        "前兩個是要產生幾列、幾欄。",
+        "第三、第四個是最小值和最大值。",
+        "第五個填 TRUE 是整數，省略是小數。",
+        "全部省略，就是一個零到一的小數。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：每人抽一個號碼",
+      "header": [
+        "座號",
+        "姓名"
+      ],
+      "rows": [
+        [
+          "1",
+          "王小明"
+        ],
+        [
+          "2",
+          "林美華"
+        ],
+        [
+          "3",
+          "陳大文"
+        ],
+        [
+          "4",
+          "張雅婷"
+        ],
+        [
+          "5",
+          "李志豪"
+        ]
+      ],
+      "formula": "=RANDARRAY(5,1,1,100,TRUE)",
+      "spill": [
+        [
+          "73"
+        ],
+        [
+          "18"
+        ],
+        [
+          "95"
+        ],
+        [
+          "42"
+        ],
+        [
+          "60"
+        ]
+      ],
+      "marks": [
+        {
+          "at": 1,
+          "range": "B2:B6",
+          "kind": "range",
+          "label": "5 位同學"
+        }
+      ],
+      "showResultAt": 3,
+      "say": [
+        "我們要幫五位同學各抽一個號碼。",
+        "班上有五個人，所以是五列一欄。",
+        "最小值一、最大值一百，第五個填 TRUE。",
+        "這是其中一次的結果，例如七十三。",
+        "結果是隨機的，你算出來會不一樣喔！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：隨機排座位",
+      "header": [
+        "座號",
+        "姓名"
+      ],
+      "rows": [
+        [
+          "1",
+          "王小明"
+        ],
+        [
+          "2",
+          "林美華"
+        ],
+        [
+          "3",
+          "陳大文"
+        ],
+        [
+          "4",
+          "張雅婷"
+        ],
+        [
+          "5",
+          "李志豪"
+        ]
+      ],
+      "formula": "=SORTBY(B2:B6,RANDARRAY(5))",
+      "spill": [
+        [
+          "張雅婷"
+        ],
+        [
+          "王小明"
+        ],
+        [
+          "李志豪"
+        ],
+        [
+          "林美華"
+        ],
+        [
+          "陳大文"
+        ]
+      ],
+      "marks": [
+        {
+          "at": 1,
+          "range": "B2:B6",
+          "kind": "range",
+          "label": "要洗牌的"
+        },
+        {
+          "at": 2,
+          "range": "B2:B6",
+          "kind": "key",
+          "label": "配上亂數"
+        }
+      ],
+      "showResultAt": 3,
+      "say": [
+        "想把座位順序隨機打亂，怎麼做？",
+        "用 SORTBY 排序 B2 到 B6 的姓名，",
+        "依據是 RANDARRAY 產生的五個亂數。",
+        "姓名就照亂數大小，排出新順序。",
+        "按一下 F9 重算，順序又會換一次！"
+      ]
+    },
+    {
+      "type": "compare",
+      "title": "RAND vs RANDARRAY",
+      "left": {
+        "head": "RAND",
+        "items": [
+          "一次一個亂數",
+          "只有零到一小數",
+          "整數要另外處理",
+          "所有版本都有"
+        ]
+      },
+      "right": {
+        "head": "RANDARRAY",
+        "items": [
+          "一次一整片亂數",
+          "可自訂最小最大值",
+          "一個引數變整數",
+          "2021 版以後"
+        ]
+      },
+      "say": [
+        "和舊的 RAND 比一比。",
+        "RAND 一次只產生一個零到一的小數，",
+        "RANDARRAY 一次產生一整片，",
+        "還能設定範圍，直接變成整數。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        {
+          "kind": "tip",
+          "text": "按 F9 可以重新產生",
+          "at": 1
+        },
+        {
+          "kind": "tip",
+          "text": "要固定就複製後貼上值",
+          "at": 2
+        },
+        {
+          "kind": "warn",
+          "text": "整數可能重複出現",
+          "at": 3
+        },
+        {
+          "kind": "warn",
+          "text": "最小值不能大於最大值",
+          "at": 4
+        }
+      ],
+      "say": [
+        "最後是幾個小提醒。",
+        "按 F9，就會重新產生一批亂數。",
+        "想固定結果，就複製後選擇貼上值。",
+        "整數亂數可能會重複，抽籤要注意。",
+        "最小值大於最大值，會出現錯誤喔。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "RANDARRAY 的第五個引數填 TRUE，代表什麼？",
+      "options": [
+        "產生整數",
+        "產生小數",
+        "不會重算",
+        "只產生一個"
+      ],
+      "answer": 0,
+      "explain": "第五個引數填 TRUE 產生整數，省略則是小數。",
+      "say": [
+        "來個隨堂小測驗！",
+        "第五個引數 whole_number，",
+        "填 TRUE 代表什麼意思呢？",
+        "答案是產生整數！"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": [
+        "列、欄、最小、最大",
+        "TRUE 產生整數",
+        "每次重算都會變",
+        "搭配 SORTBY 洗牌"
+      ],
+      "say": [
+        "重點回顧一下。",
+        "記住順序：列、欄、最小、最大、整數。",
+        "結果是隨機的，每次重算都會變。",
+        "學會 RANDARRAY，抽籤分組好輕鬆！"
+      ]
+    }
+  ]
+}

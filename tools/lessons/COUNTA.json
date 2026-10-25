@@ -1,0 +1,167 @@
+{
+  "id": "COUNTA",
+  "name": "COUNTA",
+  "zh": "非空白計數",
+  "en": "Count non-empty cells",
+  "category": "math",
+  "level": "基礎",
+  "version": "所有版本",
+  "summary": "計算範圍中有填資料、不是空白的儲存格數量。",
+  "summary_en": "Count how many cells in a range are not empty.",
+  "syntax": "=COUNTA(value1, [value2], ...)",
+  "slides": [
+    {
+      "type": "title",
+      "title": "COUNTA",
+      "subtitle": "有填資料的，通通算進來",
+      "say": [
+        "哈囉！今天要學的是 COUNTA 函數。",
+        "它會數出有填資料的儲存格有幾個，",
+        "不管是文字還是數字都算。",
+        "統計繳交人數、報名人數，超好用！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "COUNTA 能做什麼？",
+      "points": [
+        { "icon": "check", "text": "數出非空白儲存格", "at": 1 },
+        { "icon": "text", "text": "文字、數字都算", "at": 2 },
+        { "icon": "cross", "text": "空白格不算", "at": 3 },
+        { "icon": "layers", "text": "可同時數多個範圍", "at": 4 }
+      ],
+      "say": [
+        "COUNTA 的特色有四個。",
+        "第一，它數的是不是空白的儲存格。",
+        "第二，不管文字、數字還是日期都算。",
+        "第三，完全空白的格子不會被算進去。",
+        "第四，可以一次放好幾個範圍一起數。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "COUNTA",
+      "args": [
+        { "name": "value1", "desc": "要數的範圍", "at": 1 },
+        { "name": "value2", "desc": "更多範圍", "optional": true, "at": 2 }
+      ],
+      "say": [
+        "COUNTA 的語法很單純。",
+        "第一個引數放要數的範圍，",
+        "後面還可以再接更多範圍，",
+        "最多可以放到兩百五十五個。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：作業繳交人數",
+      "header": ["座號", "姓名", "作業一"],
+      "rows": [
+        ["1", "王小明", "已交"],
+        ["2", "林美華", ""],
+        ["3", "陳大文", "已交"],
+        ["4", "張雅婷", "已交"],
+        ["5", "李志豪", ""]
+      ],
+      "formula": "=COUNTA(C2:C6)",
+      "result": "3",
+      "marks": [
+        { "at": 1, "range": "C2:C6", "kind": "range", "label": "作業欄" },
+        { "at": 2, "range": "C3", "kind": "warn", "label": "空白" },
+        { "at": 2, "range": "C6", "kind": "warn", "label": "空白" },
+        { "at": 3, "range": "C2", "kind": "hit", "label": "已交" },
+        { "at": 3, "range": "C4:C5", "kind": "hit", "label": "已交" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "老師想知道作業一有幾個人交。",
+        "範圍選 C2 到 C6 的作業欄。",
+        "林美華和李志豪的格子是空白的，",
+        "有填「已交」的一共三格，",
+        "所以 COUNTA 傳回 3！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：COUNTA 和 COUNT",
+      "header": ["姓名", "段考分數"],
+      "rows": [
+        ["王小明", "85"],
+        ["林美華", "缺考"],
+        ["陳大文", "92"],
+        ["張雅婷", ""],
+        ["李志豪", "78"]
+      ],
+      "formula": "=COUNTA(B2:B6)",
+      "result": "4",
+      "marks": [
+        { "at": 1, "range": "B2:B6", "kind": "range", "label": "分數欄" },
+        { "at": 2, "range": "B3", "kind": "hit", "label": "文字也算" },
+        { "at": 3, "range": "B5", "kind": "warn", "label": "空白不算" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這次分數欄裡混了文字。",
+        "我們用 COUNTA 數 B2 到 B6。",
+        "「缺考」是文字，COUNTA 也會算進去。",
+        "張雅婷的空白格不算。",
+        "所以結果是 4；換成 COUNT 只會得到 3。"
+      ]
+    },
+    {
+      "type": "compare",
+      "title": "COUNTA vs COUNT",
+      "left": { "head": "COUNT", "items": ["只數數字", "文字不算", "適合算有分數的", "空白不算"] },
+      "right": { "head": "COUNTA", "items": ["數所有非空白", "文字也算", "適合算有填寫的", "空白不算"] },
+      "say": [
+        "COUNTA 和 COUNT 常被搞混。",
+        "COUNT 只數數字，文字不算；",
+        "COUNTA 只要有填東西，通通都算。",
+        "兩個都不會數完全空白的格子。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        { "kind": "warn", "text": "空格鍵打的空白也會被算", "at": 1 },
+        { "kind": "warn", "text": "公式傳回 \"\" 也會被算", "at": 2 },
+        { "kind": "tip", "text": "要數空白格用 COUNTBLANK", "at": 3 },
+        { "kind": "tip", "text": "要加條件用 COUNTIF", "at": 4 }
+      ],
+      "say": [
+        "最後是幾個小提醒。",
+        "格子裡如果打了空格，看起來空但會被算。",
+        "公式傳回空字串，也會被算進去喔。",
+        "想數空白格，可以改用 COUNTBLANK。",
+        "要加上條件，就用 COUNTIF。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "A1:A4 是 10、請假、空白、5，=COUNTA(A1:A4) 是？",
+      "options": ["1", "2", "3", "4"],
+      "answer": 2,
+      "explain": "10、請假、5 都有資料，只有空白不算，所以是 3。",
+      "say": [
+        "來個隨堂小測驗！",
+        "四格分別是十、請假、空白、五，",
+        "COUNTA 會算出多少呢？",
+        "答案是 3，只有空白格不算！"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": ["數非空白儲存格", "文字數字都算", "COUNT 只數數字", "空格也會被算到"],
+      "say": [
+        "重點回顧一下。",
+        "COUNTA 數的是所有有填資料的格子，",
+        "文字、數字都算，跟 COUNT 不一樣。",
+        "學會 COUNTA，繳交人數一眼看清！"
+      ]
+    }
+  ]
+}

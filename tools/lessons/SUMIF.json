@@ -1,0 +1,174 @@
+{
+  "id": "SUMIF",
+  "name": "SUMIF",
+  "zh": "條件加總函數",
+  "en": "Sum with condition",
+  "category": "math",
+  "level": "基礎",
+  "version": "所有版本",
+  "summary": "只把符合條件的資料加起來，例如分類小計。",
+  "summary_en": "Add up only the values whose cells meet a condition.",
+  "syntax": "=SUMIF(range, criteria, [sum_range])",
+  "slides": [
+    {
+      "type": "title",
+      "title": "SUMIF",
+      "subtitle": "挑出符合的，再加起來",
+      "say": [
+        "哈囉！今天要學的是 SUMIF 函數。",
+        "它會先挑出符合條件的資料，",
+        "再把對應的數字加起來。",
+        "做班費分類小計，用它最方便！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "SUMIF 能做什麼？",
+      "points": [
+        { "icon": "filter", "text": "用條件挑出資料", "at": 1 },
+        { "icon": "calc", "text": "把對應金額加總", "at": 2 },
+        { "icon": "layers", "text": "分類小計一次完成", "at": 3 },
+        { "icon": "zap", "text": "資料變動自動重算", "at": 4 }
+      ],
+      "say": [
+        "SUMIF 可以幫你做四件事。",
+        "第一，用條件挑出要的資料。",
+        "第二，把這些資料對應的金額加總。",
+        "第三，分類小計一個公式就完成。",
+        "第四，資料改了，結果也會自動更新。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "SUMIF",
+      "args": [
+        { "name": "range", "desc": "判斷條件的範圍", "at": 1 },
+        { "name": "criteria", "desc": "條件", "at": 2 },
+        { "name": "sum_range", "desc": "要加總的範圍", "optional": true, "at": 3 }
+      ],
+      "say": [
+        "來看語法，共有三個引數。",
+        "第一個 range，是用來判斷條件的範圍。",
+        "第二個 criteria，就是條件本身。",
+        "第三個 sum_range，是真正要加的範圍。",
+        "省略第三個，就直接加總第一個範圍。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：文具類共花多少",
+      "header": ["項目", "類別", "金額"],
+      "rows": [
+        ["海報紙", "文具", "120"],
+        ["飲料", "餐飲", "350"],
+        ["彩色筆", "文具", "85"],
+        ["便當", "餐飲", "600"],
+        ["膠帶", "文具", "45"]
+      ],
+      "formula": "=SUMIF(B2:B6,\"文具\",C2:C6)",
+      "result": "250",
+      "marks": [
+        { "at": 1, "range": "B2:B6", "kind": "range", "label": "條件範圍" },
+        { "at": 2, "range": "C2:C6", "kind": "key", "label": "加總範圍" },
+        { "at": 3, "range": "B2", "kind": "hit", "label": "文具" },
+        { "at": 3, "range": "B4", "kind": "hit", "label": "文具" },
+        { "at": 3, "range": "B6", "kind": "hit", "label": "文具" },
+        { "at": 4, "range": "C2", "kind": "out", "label": "120" },
+        { "at": 4, "range": "C4", "kind": "out", "label": "85" },
+        { "at": 4, "range": "C6", "kind": "out", "label": "45" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這是班費支出表，想算文具花了多少。",
+        "條件範圍是 B2 到 B6 的類別欄。",
+        "加總範圍是 C2 到 C6 的金額欄。",
+        "類別是文具的，共有三筆。",
+        "一百二加八十五加四十五，等於 250！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：省略加總範圍",
+      "header": ["項目", "類別", "金額"],
+      "rows": [
+        ["海報紙", "文具", "120"],
+        ["飲料", "餐飲", "350"],
+        ["彩色筆", "文具", "85"],
+        ["便當", "餐飲", "600"],
+        ["膠帶", "文具", "45"]
+      ],
+      "formula": "=SUMIF(C2:C6,\">100\")",
+      "result": "1070",
+      "marks": [
+        { "at": 1, "range": "C2:C6", "kind": "range", "label": "條件也是加總" },
+        { "at": 2, "range": "C2:C3", "kind": "hit", "label": "大於 100" },
+        { "at": 2, "range": "C5", "kind": "hit", "label": "大於 100" },
+        { "at": 3, "range": "C4", "kind": "warn", "label": "不到 100" },
+        { "at": 3, "range": "C6", "kind": "warn", "label": "不到 100" }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這次要加總超過一百元的大筆支出。",
+        "條件和加總都在 C 欄，第三個引數省略。",
+        "一百二、三百五、六百都符合，",
+        "八十五和四十五就不算進去。",
+        "加起來一共是 1070 元！"
+      ]
+    },
+    {
+      "type": "compare",
+      "title": "COUNTIF vs SUMIF",
+      "left": { "head": "COUNTIF", "items": ["數出符合的筆數", "只要兩個引數", "結果是幾筆", "例：幾項文具"] },
+      "right": { "head": "SUMIF", "items": ["加總符合的數值", "可多一個加總範圍", "結果是總和", "例：文具花多少"] },
+      "say": [
+        "SUMIF 和 COUNTIF 是好兄弟。",
+        "COUNTIF 數的是符合的有幾筆；",
+        "SUMIF 則是把符合的數值加起來。",
+        "一個算數量，一個算總和，別搞混喔。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        { "kind": "tip", "text": "兩個範圍大小要一致", "at": 1 },
+        { "kind": "tip", "text": "比較條件要加雙引號", "at": 2 },
+        { "kind": "tip", "text": "多個條件改用 SUMIFS", "at": 3 },
+        { "kind": "warn", "text": "SUMIFS 的加總範圍放第一個", "at": 4 }
+      ],
+      "say": [
+        "最後是幾個小提醒。",
+        "條件範圍和加總範圍，大小要一樣。",
+        "大於、小於這類條件要加雙引號。",
+        "要同時判斷多個條件，就改用 SUMIFS。",
+        "注意 SUMIFS 的加總範圍是放在第一個。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "班費表中 =SUMIF(B2:B6,\"餐飲\",C2:C6) 結果是？",
+      "options": ["350", "600", "950", "1200"],
+      "answer": 2,
+      "explain": "餐飲有飲料 350 和便當 600 兩筆，加起來是 950。",
+      "say": [
+        "來個隨堂小測驗！",
+        "如果把條件改成餐飲，",
+        "SUMIF 會算出多少呢？",
+        "答案是 950，三百五加六百！"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": ["條件範圍、條件、加總範圍", "省略加總就加第一個範圍", "比較條件加雙引號", "多條件用 SUMIFS"],
+      "say": [
+        "重點回顧一下。",
+        "SUMIF 有條件範圍、條件、加總範圍。",
+        "省略第三個，就加總條件範圍本身。",
+        "學會 SUMIF，分類小計不用再按計算機！"
+      ]
+    }
+  ]
+}

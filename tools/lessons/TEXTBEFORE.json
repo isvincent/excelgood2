@@ -1,0 +1,346 @@
+{
+  "id": "TEXTBEFORE",
+  "name": "TEXTBEFORE",
+  "zh": "取分隔符前文字",
+  "en": "Text before delimiter",
+  "category": "text",
+  "level": "進階",
+  "version": "Microsoft 365",
+  "summary": "取出指定分隔符號前面的文字，拆帳號、檔名一次搞定。",
+  "summary_en": "Return the text that comes before a given delimiter.",
+  "syntax": "=TEXTBEFORE(text, delimiter, [instance_num], [match_mode], [match_end], [if_not_found])",
+  "slides": [
+    {
+      "type": "title",
+      "title": "TEXTBEFORE",
+      "subtitle": "取出符號前面的文字",
+      "say": [
+        "哈囉！今天要學的是 TEXTBEFORE 函數。",
+        "它和 TEXTAFTER 是一對好搭檔，",
+        "專門取出某個符號前面的文字。",
+        "以前要用 LEFT 加 FIND，現在一步到位！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "TEXTBEFORE 能做什麼？",
+      "points": [
+        {
+          "icon": "cut",
+          "text": "取出分隔符前的文字",
+          "at": 1
+        },
+        {
+          "icon": "list",
+          "text": "可指定第幾個分隔符",
+          "at": 2
+        },
+        {
+          "icon": "arrow",
+          "text": "負數代表從後面數",
+          "at": 3
+        },
+        {
+          "icon": "shield",
+          "text": "找不到時可自訂訊息",
+          "at": 4
+        }
+      ],
+      "say": [
+        "TEXTBEFORE 有四個重點。",
+        "第一，取出分隔符號前面的文字。",
+        "第二，可以指定要切在第幾個符號。",
+        "第三，填負數，代表從後面開始數。",
+        "第四，找不到符號時，可以顯示自訂訊息。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "func": "TEXTBEFORE",
+      "args": [
+        {
+          "name": "text",
+          "desc": "原始文字",
+          "at": 1
+        },
+        {
+          "name": "delimiter",
+          "desc": "分隔符號",
+          "at": 1
+        },
+        {
+          "name": "instance_num",
+          "desc": "第幾個符號",
+          "optional": true,
+          "at": 2
+        },
+        {
+          "name": "match_mode",
+          "desc": "大小寫比對",
+          "optional": true,
+          "at": 3
+        },
+        {
+          "name": "match_end",
+          "desc": "結尾當分隔",
+          "optional": true,
+          "at": 3
+        },
+        {
+          "name": "if_not_found",
+          "desc": "找不到時顯示",
+          "optional": true,
+          "at": 4
+        }
+      ],
+      "say": [
+        "來看語法，和 TEXTAFTER 一模一樣。",
+        "前兩個是原始文字和分隔符號。",
+        "第三個是第幾個符號，預設是第一個。",
+        "第四、第五個是進階比對設定。",
+        "第六個是找不到符號時要顯示的文字。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：取出信箱帳號",
+      "header": [
+        "電子郵件"
+      ],
+      "rows": [
+        [
+          "amy@gmail.com"
+        ],
+        [
+          "ben@ymhs.tw"
+        ],
+        [
+          "cathy@yahoo.com"
+        ]
+      ],
+      "formula": "=TEXTBEFORE(A2:A4,\"@\")",
+      "spill": [
+        [
+          "amy"
+        ],
+        [
+          "ben"
+        ],
+        [
+          "cathy"
+        ]
+      ],
+      "marks": [
+        {
+          "at": 1,
+          "range": "A2:A4",
+          "kind": "range",
+          "label": "電子郵件"
+        },
+        {
+          "at": 2,
+          "range": "A2",
+          "kind": "hit",
+          "label": "@ 前面"
+        }
+      ],
+      "showResultAt": 3,
+      "say": [
+        "我們想從信箱取出帳號。",
+        "直接選 A2 到 A4 整欄。",
+        "分隔符號是小老鼠，取它前面的文字。",
+        "三個帳號一次溢出：amy、ben、cathy！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：去掉副檔名",
+      "header": [
+        "檔案名稱"
+      ],
+      "rows": [
+        [
+          "報告.v2.docx"
+        ]
+      ],
+      "formula": "=TEXTBEFORE(A2,\".\",-1)",
+      "result": "報告.v2",
+      "marks": [
+        {
+          "at": 1,
+          "range": "A2",
+          "kind": "range",
+          "label": "兩個句點"
+        },
+        {
+          "at": 3,
+          "range": "A2",
+          "kind": "hit",
+          "label": "最後一個"
+        }
+      ],
+      "showResultAt": 4,
+      "say": [
+        "這個檔名裡有兩個句點。",
+        "如果從第一個句點切，只會剩下報告。",
+        "我們要的是去掉副檔名的完整檔名。",
+        "第三個引數填負一，從最後一個句點切，",
+        "結果就是報告點 v2！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例三：格式錯誤的信箱",
+      "header": [
+        "電子郵件"
+      ],
+      "rows": [
+        [
+          "amy@gmail.com"
+        ],
+        [
+          "ben.ymhs.tw"
+        ],
+        [
+          "cathy@yahoo.com"
+        ]
+      ],
+      "formula": "=TEXTBEFORE(A2:A4,\"@\",,,,\"格式錯誤\")",
+      "spill": [
+        [
+          "amy"
+        ],
+        [
+          "格式錯誤"
+        ],
+        [
+          "cathy"
+        ]
+      ],
+      "marks": [
+        {
+          "at": 1,
+          "range": "A3",
+          "kind": "warn",
+          "label": "沒有 @"
+        },
+        {
+          "at": 3,
+          "range": "A2",
+          "kind": "hit",
+          "label": "正常"
+        },
+        {
+          "at": 3,
+          "range": "A4",
+          "kind": "hit",
+          "label": "正常"
+        }
+      ],
+      "showResultAt": 3,
+      "say": [
+        "A3 的信箱少了小老鼠符號。",
+        "預設會出現 N/A，看起來不太友善。",
+        "第六個引數填格式錯誤，",
+        "正常的照樣取出帳號，錯的就顯示提醒！"
+      ]
+    },
+    {
+      "type": "compare",
+      "title": "舊寫法 vs TEXTBEFORE",
+      "left": {
+        "head": "LEFT + FIND",
+        "items": [
+          "要先找符號位置",
+          "還要記得減一",
+          "從後面找很麻煩",
+          "所有版本都有"
+        ]
+      },
+      "right": {
+        "head": "TEXTBEFORE",
+        "items": [
+          "直接給分隔符號",
+          "不用算位置",
+          "負一就從後面找",
+          "限 365 版"
+        ]
+      },
+      "say": [
+        "和舊寫法比一比。",
+        "LEFT 加 FIND 要先找位置，還要減一，",
+        "從後面找更是麻煩。",
+        "TEXTBEFORE 直接給符號，負一就倒著找。"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "使用小提醒",
+      "items": [
+        {
+          "kind": "tip",
+          "text": "選整欄就能一次溢出",
+          "at": 1
+        },
+        {
+          "kind": "tip",
+          "text": "取後面文字用 TEXTAFTER",
+          "at": 2
+        },
+        {
+          "kind": "warn",
+          "text": "找不到預設傳回 #N/A",
+          "at": 3
+        },
+        {
+          "kind": "warn",
+          "text": "目前只有 Microsoft 365",
+          "at": 4
+        }
+      ],
+      "say": [
+        "最後是幾個小提醒。",
+        "第一個引數選整欄，結果會一次溢出。",
+        "想取符號後面的文字，用 TEXTAFTER。",
+        "找不到符號時，預設會出現 N/A。",
+        "注意，目前要 Microsoft 365 才有喔。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "question": "A2 是「tom@ymhs.tw」，TEXTBEFORE(A2,\"@\") 傳回？",
+      "options": [
+        "tom",
+        "ymhs.tw",
+        "@ymhs.tw",
+        "tom@"
+      ],
+      "answer": 0,
+      "explain": "TEXTBEFORE 取出 @ 前面的文字，也就是 tom。",
+      "say": [
+        "來個隨堂小測驗！",
+        "信箱是 tom 小老鼠 ymhs.tw，",
+        "用 TEXTBEFORE 切小老鼠，結果是什麼？",
+        "答案是 tom，小老鼠前面的帳號！"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": [
+        "取分隔符號前的文字",
+        "第三引數指定第幾個",
+        "負一從最後一個切",
+        "第六引數處理找不到"
+      ],
+      "say": [
+        "重點回顧一下。",
+        "TEXTBEFORE 取出分隔符號前面的文字。",
+        "負一從最後切，第六個引數處理找不到。",
+        "搭配 TEXTAFTER，拆文字無往不利！"
+      ]
+    }
+  ]
+}
